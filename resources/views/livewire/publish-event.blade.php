@@ -7,8 +7,8 @@
         @endif
     </div>
 
-    <div class="border border-blue-400 rounded-lg px-8 py-6 ml-6 mb-6 mr-6">
-        <form wire:submit.prevent="publishEvent">
+    <div class="border border-blue-400 rounded-lg px-8 py-6 ml-6 mb-6 mr-2">
+        <form wire:submit.prevent="publish">
 
             <div class="flex">
                 <div>
@@ -55,7 +55,7 @@
                     <input type="checkbox"
                         wire:model="isItYearly"
                         class="form-checkbox"
-                        value="{{$isItYearly}}"">
+                        value="{{$isItYearly}}">
                     <span class="ml-2">Does this event recurr every year?</span></span>
                 </label>
             </div>
@@ -67,7 +67,7 @@
             <footer class="flex justify-between items-center mr-4">
                 <div class="flex items-center">
                     <img class="rounded-full"
-                        src="https://i.pravatar.cc/100"
+                        src="https://i.pravatar.cc/500?u={{auth()->user()->email}}"
                         width="65"
                         alt="">
                 </div>
@@ -75,7 +75,7 @@
 
                 <button
                     type="submit"
-                    class="bg-indigo-500 rounded-lg shadow p-2 mr-8 text-white"
+                    class="bg-indigo-500 rounded-lg shadow p-2 mr-2 text-white"
                     >Publish event
                 </button>
 

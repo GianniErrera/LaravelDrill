@@ -19,7 +19,7 @@ class PublishEvent extends Component
 
     ];
 
-    public function publishEvent()
+    public function publish()
     {
         $this->validate();
         $event = new Event();
@@ -29,6 +29,7 @@ class PublishEvent extends Component
         $event->save();
 
         $this->reset(['date', 'eventDescription', 'isItYearly']);
+        $this->emitTo('timeline', 'refreshList');
     }
 
     public function render()

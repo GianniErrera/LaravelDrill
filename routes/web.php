@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 
 Route::get('/timeline', function () {
-    return view('timeline');
+    return view('mainpage');
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
