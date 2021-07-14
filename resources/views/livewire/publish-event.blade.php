@@ -1,4 +1,4 @@
-<div>
+<div class="mt-4">
     <div>
         @if (session()->has('message'))
         <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm">
@@ -10,7 +10,7 @@
     <div class="border border-blue-400 rounded-lg px-8 py-6 ml-6 mb-6 mr-2">
         <form wire:submit.prevent="publish">
 
-            <div class="flex">
+            <div class="flex p-4">
                 <div>
                     <div>
                         <label for="start">Pick a date:</label>
@@ -33,28 +33,34 @@
 
 
 
-                <div>
-                <input type="text"
-                    wire:model="eventDescription"
-                    id="eventDescription"
-                    name="eventDescription"
-                    value="{{old('eventDescription')}}"
-                    class="ml-4 mr-4 justify-center"
-                    size="160"
-                    >
+                <div class="ml-4 mr-4 mb-4  justify-center">
+                    <div>
+                        <input type="text"
+                            wire:model="eventDescription"
+                            id="eventDescription"
+                            name="eventDescription"
+                            value="{{old('eventDescription')}}"
+                            placeholder="Event name and description"
+                            class="border border-gray-500 p-2"
+                            size="160"
+                            >
+                    </div>
+                    <div>
+                        @error('eventDescription')
+                            <p class="text-red-500 text-sm mt-2"> {{ $message}}</p>
+                        @enderror
+                    </div>
                 </div>
 
-                @error('eventDescription')
-                    <p class="text-red-500 text-sm mt-2"> {{ $message}}</p>
-               @enderror
+
 
             </div>
 
             <div class="flex mt-6 mb-6">
-                <label class="flex items-center">
+                <label class="flex items-center cursor-pointer">
                     <input type="checkbox"
                         wire:model="isItYearly"
-                        class="form-checkbox"
+                        class="form-checkbox cursor-pointer"
                         value="{{$isItYearly}}">
                     <span class="ml-2">Does this event recurr every year?</span></span>
                 </label>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\Event;
+use App\Models\EventInstance;
 
 use Livewire\Component;
 
@@ -18,6 +18,6 @@ class Timeline extends Component
 
     public function render()
     {
-        return view('livewire.timeline', ['events' => Event::latest()->get()]);
+        return view('livewire.timeline', ['events' => EventInstance::latest()->get()]);
     }
 }
