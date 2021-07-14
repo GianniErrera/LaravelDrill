@@ -1,4 +1,26 @@
 <div>
+    <div class="mb-4">
+        {{-- @if($columnOrderCriteria = "created_at")
+            <button
+                wire:click="$set('columnOrderCriteria', 'date')"
+                    class="bg-blue-500 rounded-lg shadow py-2 px-3 ml-4 text-white"
+                    >Order by date
+            </button>
+         @else
+
+            <button
+                    wire:click="$set('columnOrderCriteria', 'created_at')"
+                    class="bg-blue-500 rounded-lg shadow py-2 px-3 ml-4 text-white"
+                    >Order by insert date
+            </button>
+
+         @endif --}}
+         <select wire:model="columnOrderCriteria"
+            class="form-control ml-4">
+            <option value="created_at">Ordered by creation date</option>
+            <option value="date">Ordered by date</option>
+         </select>
+    </div>
 
 
     <div class="border border-b-gray-300 rounded-xl">

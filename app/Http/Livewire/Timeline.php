@@ -9,15 +9,17 @@ use Livewire\Component;
 class Timeline extends Component
 {
 
+    public $columnOrderCriteria = "created_at";
+
     protected $listeners = ['refreshList' => '$refresh'];
 
-    public function test()
+    public function updated()
     {
-        dd('OK');
+       $this->render();
     }
 
     public function render()
     {
-        return view('livewire.timeline', ['events' => EventInstance::latest()->get()]);
+        return view('livewire.timeline', ['events' => EventInstance::orderBy($this->columnOrderCriteria)->get()]);
     }
 }
