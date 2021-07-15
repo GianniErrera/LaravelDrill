@@ -9,7 +9,7 @@
 
     <div class="border border-blue-400 rounded-lg px-8 py-6 ml-6 mb-6 mr-6">
         <form wire:submit.prevent="publishEvent">
-            <div class="flex">
+            <div class="flex w-auto">
                 <div>
                     <label for="start">Start date:</label>
 
@@ -32,8 +32,7 @@
                     id="eventDescription"
                     name="eventDescription"
                     value="{{old('eventDescription')}}"
-                    class="ml-4 mr-4 justify-center"
-                    size="180"
+                    class=" ml-4 mr-4 justify-center"
                     >
                 </div>
 

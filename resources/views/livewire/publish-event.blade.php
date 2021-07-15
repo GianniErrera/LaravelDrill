@@ -42,7 +42,6 @@
                             value="{{old('eventDescription')}}"
                             placeholder="Event name and description"
                             class="border border-gray-500 p-2"
-                            size="160"
                             >
                     </div>
                     <div>
@@ -62,7 +61,7 @@
                         wire:model="isItYearly"
                         class="form-checkbox cursor-pointer"
                         value="{{$isItYearly}}">
-                    <span class="ml-2">Does this event recurr every year?</span></span>
+                    <span class="ml-2">Does this event recurr every year?</span>
                 </label>
             </div>
 

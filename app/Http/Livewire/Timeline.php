@@ -10,6 +10,8 @@ class Timeline extends Component
 {
 
     public $columnOrderCriteria = "created_at";
+    public $search;
+    public $searchDate;
 
     protected $listeners = ['refreshList' => '$refresh'];
 
@@ -20,6 +22,12 @@ class Timeline extends Component
 
     public function render()
     {
-        return view('livewire.timeline', ['events' => EventInstance::orderBy($this->columnOrderCriteria)->get()]);
+        return view('livewire.timeline',
+            ['events' => EventInstance::
+            where(function($subquery) { $subquery->
+                where('eventDescription', 'like', '%' . $this->search . '%')->
+                whereDate('date', '=', date('Y-m-d', strtotime($this->searchDate)));
+                })->
+            orderBy($this->columnOrderCriteria)->get()]);
     }
 }

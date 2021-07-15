@@ -1,25 +1,41 @@
 <div>
-    <div class="mb-4">
-        {{-- @if($columnOrderCriteria = "created_at")
-            <button
-                wire:click="$set('columnOrderCriteria', 'date')"
-                    class="bg-blue-500 rounded-lg shadow py-2 px-3 ml-4 text-white"
-                    >Order by date
-            </button>
-         @else
+    <div class="flex">
+        <div class="mb-4">
 
-            <button
-                    wire:click="$set('columnOrderCriteria', 'created_at')"
-                    class="bg-blue-500 rounded-lg shadow py-2 px-3 ml-4 text-white"
-                    >Order by insert date
-            </button>
+            <select wire:model="columnOrderCriteria"
+                class="form-control ml-4">
+                <option value="created_at">Ordered by creation date</option>
+                <option value="date">Ordered by date</option>
+            </select>
+        </div>
 
-         @endif --}}
-         <select wire:model="columnOrderCriteria"
-            class="form-control ml-4">
-            <option value="created_at">Ordered by creation date</option>
-            <option value="date">Ordered by date</option>
-         </select>
+
+        <div class="mb-3 ml-2 flex-grow">
+            <input type="text"
+                                wire:model="search"
+                                id="search"
+                                name="search"
+                                value="{{old('search')}}"
+                                placeholder=""
+                                class="border border-gray-500 p-2"
+                                >
+
+
+        </div>
+
+        <div>
+            <label for="start">Pick a date:</label>
+
+            <input type="date"
+                wire:model="searchDate"
+                id="searchDate"
+                name="searchDate"
+                value="{{old('searchDate')}}"
+                class="ml-4 mb-4"
+                >
+
+                {{date('Y-m-d', strtotime($searchDate))}}
+        </div>
     </div>
 
 
