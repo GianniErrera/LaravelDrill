@@ -26,7 +26,7 @@ class Timeline extends Component
             ['events' => EventInstance::
             where(function($subquery) { $subquery->
                 where('eventDescription', 'like', '%' . $this->search . '%')->
-                whereDate('date', '=', date('Y-m-d', strtotime($this->searchDate)));
+                whereDate('date', '=', $this->searchDate);
                 })->
             orderBy($this->columnOrderCriteria)->get()]);
     }

@@ -34,7 +34,7 @@
                 class="ml-4 mb-4"
                 >
 
-                {{date('Y-m-d', strtotime($searchDate))}}
+                {{ $searchDate}}
         </div>
     </div>
 
