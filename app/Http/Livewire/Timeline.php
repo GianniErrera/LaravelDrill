@@ -24,10 +24,8 @@ class Timeline extends Component
     {
         return view('livewire.timeline',
             ['events' => EventInstance::
-            where(function($subquery) { $subquery->
-                where('eventDescription', 'like', '%' . $this->search . '%');
-                })->
-                searchDate($this->searchDate)->
-                orderBy($this->columnOrderCriteria)->get()]);
+            search($this->search)->
+            searchDate($this->searchDate)->
+            orderBy($this->columnOrderCriteria)->get()]);
     }
 }
