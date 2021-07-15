@@ -16,7 +16,9 @@ class EventInstance extends Model
         'eventDescription',
         'isItRecurringYearly'
     ];
-
+    public function scopeSearchDate($query, $searchDate) {
+        return ($searchDate != null) ? $query->whereDate('date', '=', $searchDate) : $query;
+    }
 
     public function yearly() {
 
