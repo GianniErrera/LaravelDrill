@@ -123,6 +123,7 @@
             <p class="p-4">No events yet</p>
         @endforelse
 
+        {{$events->links()}}
 
     </div>
 </div>

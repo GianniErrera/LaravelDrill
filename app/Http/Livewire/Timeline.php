@@ -3,11 +3,13 @@
 namespace App\Http\Livewire;
 
 use App\Models\EventInstance;
+use Livewire\WithPagination;
 
 use Livewire\Component;
 
 class Timeline extends Component
 {
+    use WithPagination;
 
     public $columnOrderCriteria = "created_at";
     public $search;
@@ -32,6 +34,6 @@ class Timeline extends Component
                 ignoreYearFromQuery($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
                 startDate($this->startDate)->
                 endDate($this->endDate)->
-                orderBy($this->columnOrderCriteria)->get()]);
+                orderBy($this->columnOrderCriteria)->paginate(10)]);
     }
 }
