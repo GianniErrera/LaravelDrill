@@ -29,7 +29,7 @@ class Timeline extends Component
             ['events' => EventInstance::
                 search($this->search)->
                 searchDate($this->searchDate)->
-                // ignoreYear($this->ignoreYearFromQuery)->
+                ignoreYearFromQuery($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
                 startDate($this->startDate)->
                 endDate($this->endDate)->
                 orderBy($this->columnOrderCriteria)->get()]);

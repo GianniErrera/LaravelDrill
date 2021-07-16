@@ -57,8 +57,6 @@
             </label>
           </div>
 
-          {{$ignoreYearFromQuery}}
-
         <div class="mr-4 text-center">
             <button
                 wire:click="removeFilters"
