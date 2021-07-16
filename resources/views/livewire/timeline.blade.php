@@ -1,5 +1,5 @@
 <div>
-    <div class="flex">
+    <div class="flex justify-around">
         <div class="mb-4">
 
             <select wire:model="columnOrderCriteria"
@@ -10,7 +10,7 @@
         </div>
 
 
-        <div class="mb-3 ml-2 flex-grow">
+        <div class="mb-3 ml-2">
             <input type="text"
                                 wire:model="search"
                                 id="search"
@@ -23,15 +23,63 @@
 
         </div>
 
+        <div class="block mr-4">
+            <label for="startDate" class="block text-center">Start date:</label>
 
-        <div>
-            <label for="start">Pick a date:</label>
+            <input type="date"
+                wire:model="startDate"
+                id="startDate"
+                name="startDate"
+                class="ml-4 mb-4"
+                >
+
+        </div>
+
+        <div class="block mr-6">
+            <label for="endDate" class="block text-center">End date:</label>
+
+            <input type="date"
+                wire:model="endDate"
+                id="endDate"
+                name="endDate"
+                class="ml-4 mb-4"
+                >
+
+        </div>
+
+        <div class="flex mr-4">
+            <label class="flex block items-center">
+              <input
+               type="checkbox"
+               wire-model="excludeCurrentYear"
+               value= "YES"
+               class="form-checkbox">
+              <span class="ml-2">Exclude current year</span>
+            </label>
+          </div>
+
+          {{$excludeCurrentYear}}
+
+        <div class="mr-4 text-center">
+            <button
+                wire:click="removeFilters"
+                class="cursor-pointer">
+                    <span class="items-center">Reset filters</span>
+                    <img
+                        src ="images/filter-remove.png"
+                        width="30"
+                        class="mr-2 items-center transform hover:scale-110"
+                        >
+            </button>
+        </div>
+
+        <div class="block">
+            <label for="date" class="block text-center">Pick a date:</label>
 
             <input type="date"
                 wire:model="searchDate"
                 id="searchDate"
                 name="searchDate"
-                value="{{old('searchDate')}}"
                 class="ml-4 mb-4"
                 >
 

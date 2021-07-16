@@ -12,20 +12,25 @@ class Timeline extends Component
     public $columnOrderCriteria = "created_at";
     public $search;
     public $searchDate;
+    public $startDate;
+    public $endDate;
+    public $excludeCurrentYear;
 
     protected $listeners = ['refreshList' => '$refresh'];
 
-    public function updated()
+    public function removeFilters()
     {
-       $this->render();
+       $this->reset();
     }
 
     public function render()
     {
         return view('livewire.timeline',
             ['events' => EventInstance::
-            search($this->search)->
-            searchDate($this->searchDate)->
-            orderBy($this->columnOrderCriteria)->get()]);
+                search($this->search)->
+                searchDate($this->searchDate)->
+                exceptCurrentYear($this->excludeCurrentYear)->
+                timeInterval($this->startDate, $this->endDate)->
+                orderBy($this->columnOrderCriteria)->get()]);
     }
 }

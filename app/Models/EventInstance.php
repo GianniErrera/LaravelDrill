@@ -25,6 +25,14 @@ class EventInstance extends Model
         return $query->where('eventDescription', 'like', '%' . $search . '%');
     }
 
+    public function scopeExceptCurrentYear($query, $excludeCurrentYear) {
+        return ($excludeCurrentYear == true) ? dd('OK')  : $query;
+    }
+
+    public function scopeTimeInterval($query, $startDate, $endDate) {
+        return ($startDate && $endDate) ? $query->whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)  : $query;
+    }
+
     public function yearly() {
 
         return $this->isItRecurringYearly;
