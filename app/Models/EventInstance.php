@@ -29,13 +29,18 @@ class EventInstance extends Model
         if ($ignoreYearFromQuery == true) {
         return $query;
         }
-        else if($startDate | $endDate) {
-            return $query->
-            whereYear('date', '>=', date_format(date_create($startDate), 'Y'))->
+        if($startDate ) {
+            $query->
+            whereYear('date', '>=', date_format(date_create($startDate), 'Y'));
+
+        }
+        if ($endDate) {
+            $query->
             whereYear('date', '<=', date_format(date_create($endDate), 'Y'));
         }
-        else return $query;
+        return $query;
     }
+
 
     public function scopeStartDate($query, $startDate) {
 
