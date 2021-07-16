@@ -14,7 +14,7 @@ class Timeline extends Component
     public $searchDate;
     public $startDate;
     public $endDate;
-    public $excludeCurrentYear;
+    public $ignoreYearFromQuery;
 
     protected $listeners = ['refreshList' => '$refresh'];
 
@@ -29,8 +29,9 @@ class Timeline extends Component
             ['events' => EventInstance::
                 search($this->search)->
                 searchDate($this->searchDate)->
-                exceptCurrentYear($this->excludeCurrentYear)->
-                timeInterval($this->startDate, $this->endDate)->
+                // ignoreYear($this->ignoreYearFromQuery)->
+                startDate($this->startDate)->
+                endDate($this->endDate)->
                 orderBy($this->columnOrderCriteria)->get()]);
     }
 }

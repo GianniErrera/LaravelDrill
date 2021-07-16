@@ -51,14 +51,13 @@
             <label class="flex block items-center">
               <input
                type="checkbox"
-               wire-model="excludeCurrentYear"
-               value= "YES"
+               wire:model="ignoreYearFromQuery"
                class="form-checkbox">
-              <span class="ml-2">Exclude current year</span>
+              <span class="ml-2">Search interval over all years</span>
             </label>
           </div>
 
-          {{$excludeCurrentYear}}
+          {{$ignoreYearFromQuery}}
 
         <div class="mr-4 text-center">
             <button

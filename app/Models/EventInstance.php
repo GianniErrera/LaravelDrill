@@ -29,8 +29,20 @@ class EventInstance extends Model
         return ($excludeCurrentYear == true) ? dd('OK')  : $query;
     }
 
-    public function scopeTimeInterval($query, $startDate, $endDate) {
-        return ($startDate && $endDate) ? $query->whereDate('date', '>=', $startDate)->whereDate('date', '<=', $endDate)  : $query;
+    public function scopeStartDate($query, $startDate) {
+
+        return $query->
+            whereMonth('date', '>=', date_format(date_create($startDate), 'm'))->
+            whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
+            orWhereMonth('date', '>', date_format(date_create($startDate), 'm'));
+    }
+
+    public function scopeEndDate($query, $endDate) {
+
+        return $query->
+            whereMonth('date', '<=', date_format(date_create($endDate), 'm'))->
+            whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
+            orWhereMonth('date', '<', date_format(date_create($endDate), 'm'));
     }
 
     public function yearly() {
