@@ -25,30 +25,45 @@ class EventInstance extends Model
         return $query->where('eventDescription', 'like', '%' . $search . '%');
     }
 
-    public function scopeIgnoreYearFromQuery($query, $ignoreYearFromQuery, $startDate, $endDate) {
+    public function scopeTimeInterval($query, $ignoreYearFromQuery, $startDate, $endDate) {
+        $query = $query;
         if ($ignoreYearFromQuery == true) {
-        return $query;
-        }
-        if($startDate ) {
-            $query->
-            whereYear('date', '>=', date_format(date_create($startDate), 'Y'));
+            if($startDate) {
+                $query->
+                whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
+                orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                whereDay('date', '>=', date_format(date_create($startDate), 'd'));
+               }
 
+            if($endDate) {
+                $query->
+                orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))-> // orWhere is needed as this is not logically concatenated to previous subquery
+                orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
+                whereDay('date', '<=', date_format(date_create($endDate), 'd'));
+               }
         }
-        if ($endDate) {
-            $query->
-            whereYear('date', '<=', date_format(date_create($endDate), 'Y'));
+        else {
+            if($startDate) {
+             $query->
+                whereDate('date', '>=', date_format(date_create($startDate), 'Y-m-d'));
+            }
+
+            if($endDate) {
+                $query->
+                whereDate('date', '<=', date_format(date_create($endDate), 'Y-m-d'));
+               }
         }
-        return $query;
     }
 
 
-    public function scopeStartDate($query, $startDate) {
+    public function scopeStartDate($query, $startDate, $endDate) {
 
         return ($startDate != null) ? $query->
             whereMonth('date', '>=', date_format(date_create($startDate), 'm'))->
             whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
             orWhereMonth('date', '>', date_format(date_create($startDate), 'm'))
             : $query;
+
     }
 
     public function scopeEndDate($query, $endDate) {
