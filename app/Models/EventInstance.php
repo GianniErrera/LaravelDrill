@@ -50,7 +50,7 @@ class EventInstance extends Model
 
             if($endDate) {
                 $query->
-                whereDate('date', '<=', date_format(date_create($endDate), 'Y-m-d'));
+                orWhereDate('date', '<=', date_format(date_create($endDate), 'Y-m-d'));
                }
         }
     }
