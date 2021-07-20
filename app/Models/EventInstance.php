@@ -44,7 +44,12 @@ class EventInstance extends Model
                         whereMonth('date', '=', date_format(date_create($startDate), 'm'))->
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'));
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                        whereDay('date', '<=', date_format(date_create($startDate), 'd'))->
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                        whereDay('date', '>=', date_format(date_create($endDate), 'd'))->
+                        orWhereMonth('date', '>', date_format(date_create($startDate), 'm'))->
+                        orWhereMonth('date', '<', date_format(date_create($startDate), 'm'));
                 }
                 elseif($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
                     dd($query->
