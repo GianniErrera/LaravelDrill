@@ -27,7 +27,6 @@ class EventInstance extends Model
     }
 
     public function scopeTimeInterval($query, $ignoreYearFromQuery, $startDate, $endDate) {
-        $query = $query;
 
         if ($ignoreYearFromQuery == true) {
 
@@ -40,6 +39,10 @@ class EventInstance extends Model
                 $endDateNoYear = DateTime::createFromFormat('m-d', $rangeEndMonth . "-" . $rangeEndDay);
 
                 if($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
+                    \DB::enableQueryLog();
+
+
+
                     $query->
                         whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
                         whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
@@ -53,6 +56,8 @@ class EventInstance extends Model
                         orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'));
+
+                        // dd(\DB::getQueryLog());
                 }
 
                 else {

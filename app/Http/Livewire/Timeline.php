@@ -4,7 +4,6 @@ namespace App\Http\Livewire;
 
 use App\Models\EventInstance;
 use Livewire\WithPagination;
-use Carbon\Carbon;
 use Livewire\Component;
 
 class Timeline extends Component
@@ -55,11 +54,21 @@ class Timeline extends Component
     }
 
     public function updatedIgnoreYearFromQuery() {
-        if($this->startDate && $this->endDate) {
+        if($this->startDate && $this->endDate && $this->ignoreYearFromQuery) {
+            $this->resetErrorBag();
+            $this->resetValidation();
+        }
+        elseif($this->startDate && $this->endDate) {
             $this->validate();
         }
        $this->resetPage(); // this should always be triggered
    }
+
+   public function hydrate()
+    {
+        $this->resetErrorBag();
+        $this->resetValidation();
+    }
 
 
     public function render() {
@@ -68,12 +77,7 @@ class Timeline extends Component
                 search($this->search)->
                 searchDate($this->searchDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
-                orderBy($this->columnOrderCriteria)->paginate(10),
-             'reminders' => EventInstance::
-                where('date', '>=', Carbon::yesterday())->
-                where('date', '<=', Carbon::today()->addDays(30))->
-                orderBy('date')->
-                get()
+                orderBy($this->columnOrderCriteria)->paginate(10)
             ]);
     }
 }
