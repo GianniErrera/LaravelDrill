@@ -28,29 +28,38 @@ class Timeline extends Component
         $this->reset();
     }
 
-    public function updatedEndDate() {
-        if($this->startDate && !$this->ignoreYearFromQuery) {
-            //$this->validate();
-        }
+    public function updatedColumnOrderCriteria() {
+        $this->resetPage();
+    }
+
+    public function updatedSearch() {
+        $this->resetPage();
+    }
+
+    public function updatedSearchDate() {
+        $this->resetPage();
     }
 
     public function updatedStartDate() {
         if($this->endDate && !$this->ignoreYearFromQuery) {
-            //$this->validate();
+            $this->validate();
         }
+        $this->resetPage(); // this should always be triggered
     }
 
-   public function updatedIgnoreYearFromQuery() {
-       if($this->startDate && $this->endDate) {
-           $this->validate();
-       }
+    public function updatedEndDate() {
+        if($this->startDate && !$this->ignoreYearFromQuery) {
+            $this->validate();
+        }
+        $this->resetPage(); // this should always be triggered
+    }
+
+    public function updatedIgnoreYearFromQuery() {
+        if($this->startDate && $this->endDate) {
+            $this->validate();
+        }
+       $this->resetPage(); // this should always be triggered
    }
-
-    public function updated() {
-        $this->resetPage();
-    }
-
-
 
 
     public function render() {
@@ -60,7 +69,7 @@ class Timeline extends Component
                 searchDate($this->searchDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
                 orderBy($this->columnOrderCriteria)->paginate(10),
-            'reminders' => EventInstance::
+             'reminders' => EventInstance::
                 where('date', '>=', Carbon::yesterday())->
                 where('date', '<=', Carbon::today()->addDays(30))->
                 orderBy('date')->

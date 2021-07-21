@@ -2,10 +2,11 @@
     <form>
         @forelse ($reminders as $reminder)
         <div class="flex m-4 p-4 justify-between bg-blue-800 text-white">
-            <div class="flex">
+            <div class="flex reminder"
+                id ="{{$loop->iteration}}">
                 {{$reminder->date . " - " . $reminder->eventDescription}}
             </div>
-            <button >
+            <button onclick="this.parentElement.style.display = 'none';" >
                 <div class="flex font-xl font-bold text-grey-900 text-center">
                     X
                 </div>
@@ -15,6 +16,7 @@
         @empty
 
         @endforelse
+
         <div class="flex justify-around">
             <div class="mb-4">
 
@@ -154,4 +156,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 <script>
     new ClipboardJS('#copyToClipboard');
+</script>
+<script>
 </script>

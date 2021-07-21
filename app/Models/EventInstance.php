@@ -39,36 +39,30 @@ class EventInstance extends Model
                 $startDateNoYear = DateTime::createFromFormat('m-d', $rangeStartMonth . "-" . $rangeStartDay);
                 $endDateNoYear = DateTime::createFromFormat('m-d', $rangeEndMonth . "-" . $rangeEndDay);
 
-                if($rangeStartMonth == $rangeEndMonth) {
+                if($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
                     $query->
-                        whereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
+                        whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // if startDate and endDate are in the same month
+                        whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
                         orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
-                        whereDay('date', '<=', date_format(date_create($startDate), 'd'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
-                        whereDay('date', '>=', date_format(date_create($endDate), 'd'))->
-                        orWhereMonth('date', '>', date_format(date_create($startDate), 'm'))->
-                        orWhereMonth('date', '<', date_format(date_create($startDate), 'm'));
-                }
-                elseif($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
-                    dd($query->
-                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
                         whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                        whereDay('date', '<=', date_format(date_create($endDate), 'd')));
+                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
+                        whereDay('date', '<=', date_format(date_create($endDate), 'd'));
                 }
 
                 else {
                     $query->
-                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> //if startDate is after endDate we take all months in the desired interval
+                        orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))->
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
-                        orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))-> // orWhere is needed as this is not logically concatenated to previous subquery
                         orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                        whereDay('date', '<=', date_format(date_create($endDate), 'd'));;
+                        whereDay('date', '<=', date_format(date_create($endDate), 'd'));
 
                 }
 
