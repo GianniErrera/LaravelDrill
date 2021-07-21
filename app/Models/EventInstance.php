@@ -39,25 +39,17 @@ class EventInstance extends Model
                 $endDateNoYear = DateTime::createFromFormat('m-d', $rangeEndMonth . "-" . $rangeEndDay);
 
                 if($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
-                    \DB::enableQueryLog();
 
 
 
-                    $query->
+                    $results = $query->
                         whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
                         whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // if startDate and endDate are in the same month, we know already which one comes first
-                        whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                        whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
-                        whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // if startDate and endDate are not in the same month
-                        whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'));
 
-                        // dd(\DB::getQueryLog());
                 }
 
                 else {
@@ -68,7 +60,6 @@ class EventInstance extends Model
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'));
-
                 }
 
             }
