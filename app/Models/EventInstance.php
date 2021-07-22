@@ -45,9 +45,13 @@ class EventInstance extends Model
                     $results = $query->
                         whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
                         whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // if startDate and endDate are in the same month, we know already which one comes first
+                        whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
-                        orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
+                        whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
+                        whereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
+                        whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
+                        whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'));
 
                 }
@@ -66,16 +70,16 @@ class EventInstance extends Model
 
             elseif($startDate) { // these two elseifs are only triggered if checkbox is checked but only start date or end date is picked
             $query->
-            whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
-            orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
-            whereDay('date', '>=', date_format(date_create($startDate), 'd'));
+                whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
+                orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
+                whereDay('date', '>=', date_format(date_create($startDate), 'd'));
             }
 
             elseif($endDate) {
             $query->
-            orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))-> // orWhere is needed as this is not logically concatenated to previous subquery
-            orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-            whereDay('date', '<=', date_format(date_create($endDate), 'd'));
+                orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))-> // orWhere is needed as this is not logically concatenated to previous subquery
+                orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
+                whereDay('date', '<=', date_format(date_create($endDate), 'd'));
             }
         }
 
