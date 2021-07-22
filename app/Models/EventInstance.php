@@ -49,9 +49,9 @@ class EventInstance extends Model
                         whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'))->
-                        whereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
+                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
                         whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
-                        whereMonth('date', '=', date_format(date_create($endDate), 'm'))->
+                        orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
                         whereDay('date', '<=', date_format(date_create($endDate), 'd'));
 
                 }
