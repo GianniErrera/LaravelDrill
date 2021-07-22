@@ -42,7 +42,7 @@ class EventInstance extends Model
 
 
 
-                    $results = $query->
+                    $query->
                         whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
                         whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
                         orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // if startDate and endDate are in the same month, we know already which one comes first
