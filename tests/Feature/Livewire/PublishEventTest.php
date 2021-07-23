@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class CreateEventTest extends TestCase
+class PublishEventTest extends TestCase
 {
 
     use RefreshDatabase;
@@ -31,6 +31,33 @@ class CreateEventTest extends TestCase
                 'eventDescription' => 'foo',
             ]);
     }
+
+    /** @test */
+    public function event_description_missing()
+    {
+        $this->actingAs(User::factory()->create());
+
+        Livewire::test(PublishEvent::class)
+            ->set('eventDescription', "")
+            ->set('isItYearly', false)
+            ->set('date', '1800-01-24')
+            ->call('publish')
+            ->assertHasErrors(['eventDescription']);
+    }
+
+    /** @test */
+    public function date_missing()
+    {
+        $this->actingAs(User::factory()->create());
+
+        Livewire::test(PublishEvent::class)
+            ->set('eventDescription', null)
+            ->set('isItYearly', false)
+            ->set('date', '')
+            ->call('publish')
+            ->assertHasErrors(['date']);
+    }
+
 
     /** @test */
     public function the_component_can_render()
