@@ -3,6 +3,7 @@
 namespace Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
+use App\Models\EventInstance;
 
 class createEvent extends TestCase
 {
@@ -13,6 +14,7 @@ class createEvent extends TestCase
      */
     public function test_example()
     {
+
         $this->assertTrue(true);
     }
 }
