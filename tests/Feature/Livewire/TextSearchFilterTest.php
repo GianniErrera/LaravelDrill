@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
 use Tests\TestCase;
 
-class TextSearcFilterTest extends TestCase
+class TextSearchFilterTest extends TestCase
 {
 
     use RefreshDatabase;

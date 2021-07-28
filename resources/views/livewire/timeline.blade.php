@@ -14,6 +14,7 @@
 
 
         <div class="mb-3 ml-2">
+            <label for="search" class="block text-center">Search events:</label>
             <input type="text"
                                 wire:model="search"
                                 id="search"
@@ -26,45 +27,18 @@
 
         </div>
 
-        <div class="block mr-4">
-            <label for="startDate" class="block text-center">Start date:</label>
+        @livewire('daterange-query')
 
-            <input type="date"
-                wire:model="startDate"
-                id="startDate"
-                name="startDate"
-                class="ml-4 mb-4"
-                >
-
-        </div>
-
-
-        <div class="block mr-6">
-            <label for="endDate" class="block text-center">End date:</label>
-
-            <input type="date"
-                wire:model="endDate"
-                id="endDate"
-                name="endDate"
-                class="ml-4 mb-4"
-                >
-
-                <div>
-                    @error('endDate')
-                    <p class="text-red-500 text-sm m-2"> {{ $message}}</p>
-                    @enderror
-                </div>
-
-        </div>
 
         <div class="flex mr-4">
-            <label class="flex block items-center">
+            <label class="block items-center">
             <input
             type="checkbox"
             wire:model="ignoreYearFromQuery"
-            class="form-checkbox">
+            class="block items-center form-checkbox p-2 m-2 mb-1">
             <span class="ml-2">Search interval over all years</span>
             </label>
+
         </div>
 
         <div class="mr-4 text-center">
@@ -83,11 +57,14 @@
         <div class="block">
             <label for="date" class="block text-center">Pick a date:</label>
 
-            <input type="date"
+            <input
                 wire:model="searchDate"
                 id="searchDate"
                 name="searchDate"
-                class="ml-4 mb-4"
+                type="text"
+                class="ml-4 mb-4 p-2 border border-gray-800"
+                class="border border-gray-500 p-2"
+                data-provide="picker"
                 >
 
         </div>
@@ -135,6 +112,24 @@
         {{$events->links()}}
 
     </div>
+    <script>
+        const picker= new Litepicker({
+          element: document.getElementById('searchDate'),
+          format: 'DD-MM-YYYY',
+          resetButton: true,
+          singleMode: true,
+          allowRepick: true,
+          autoRefresh: true,
+          setup: (picker) => {
+
+              picker.on('selected', (date) => {
+                  Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
+            document.getElementById('searchDate').value = date.format('YYYY-MM-DD')
+            })
+          }
+
+        })
+    </script>
 
 </div>
 
@@ -142,4 +137,8 @@
 <script>
     new ClipboardJS('#copyToClipboard');
 </script>
+
+
+
+
 

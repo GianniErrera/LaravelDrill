@@ -21,6 +21,7 @@
         "tailwindcss": "^2.2.2"
     },
     "dependencies": {
-        "clipboard": "^2.0.8"
+        "clipboard": "^2.0.8",
+        "litepicker": "^2.0.11"
     }
 }

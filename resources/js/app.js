@@ -1,7 +1,8 @@
 require('./bootstrap');
 
 import Alpine from 'alpinejs';
-import Clipboard from 'v-clipboard'
+import Litepicker from 'litepicker';
+
 
 window.Alpine = Alpine;
 
