@@ -21,35 +21,41 @@
                                 name="search"
                                 value="{{old('search')}}"
                                 placeholder=""
-                                class="border border-gray-500 p-2"
+                                class="border border-gray-800 mb-4 p-2"
                                 >
 
-
         </div>
-
-        @livewire('daterange-query')
+        <div class="mb-3 ml-2">
+            <label for="search" class="block text-center">Search over dates range:</label>
+            <input
+            id="searchRange"
+            name="searchRange"
+            class="ml-4 mb-4 p-2 border border-gray-800"
+            >
+        </div>
 
 
         <div class="flex mr-4">
-            <label class="block items-center">
+            <label class="flex items-center">
             <input
             type="checkbox"
             wire:model="ignoreYearFromQuery"
-            class="form-checkbox ">
+            class="flex-none ">
             <span class="ml-2">Search interval over all years</span>
             </label>
 
+
         </div>
 
-        <div class="mr-4 text-center">
+        <div class="mr-4 items-center">
             <button
                 wire:click="removeFilters"
-                class="cursor-pointer">
-                    <span class="items-center">Reset filters</span>
+                class="cursor-pointer align-center">
+                    <span class="text-center">Reset filters</span>
                     <img
                         src ="images/filter-remove.png"
                         width="30"
-                        class="mr-2 items-center transform hover:scale-110"
+                        class="mr-2 transform hover:scale-110"
                         >
             </button>
         </div>
@@ -134,6 +140,34 @@
                     evt.preventDefault();
 
                     Livewire.emit('resetSearchDate');
+                });
+
+                return btn;
+                }
+
+            })
+    </script>
+    <script>
+
+            const rangepicker= new Litepicker({
+                element: document.getElementById('searchRange'),
+                format: 'DD-MM-YYYY',
+                singleMode: false,
+                resetButton: true,
+                setup: (picker) => {
+
+                    picker.on('selected', (startDate, endDate) => {
+                        console.log(startDate, endDate);
+                        Livewire.emit('searchRange', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
+                    })
+                },
+                resetButton: () => {
+                let btn = document.createElement('button');
+                btn.innerText = 'Clear';
+                btn.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+
+                    Livewire.emit('resetDateRange');
                 });
 
                 return btn;
