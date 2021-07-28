@@ -35,7 +35,7 @@
             <input
             type="checkbox"
             wire:model="ignoreYearFromQuery"
-            class="block items-center form-checkbox p-2 m-2 mb-1">
+            class="form-checkbox ">
             <span class="ml-2">Search interval over all years</span>
             </label>
 
@@ -114,21 +114,32 @@
     </div>
     <script>
         const picker= new Litepicker({
-          element: document.getElementById('searchDate'),
-          format: 'DD-MM-YYYY',
-          resetButton: true,
-          singleMode: true,
-          allowRepick: true,
-          autoRefresh: true,
-          setup: (picker) => {
+            element: document.getElementById('searchDate'),
+            format: 'DD-MM-YYYY',
+            resetButton: true,
+            singleMode: true,
+            allowRepick: true,
+            autoRefresh: true,
+            setup: (picker) => {
 
-              picker.on('selected', (date) => {
-                  Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
-            document.getElementById('searchDate').value = date.format('YYYY-MM-DD')
+                picker.on('selected', (date) => {
+                    Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
+                document.getElementById('searchDate').value = date.format('YYYY-MM-DD')
+                })
+            },
+            resetButton: () => {
+                let btn = document.createElement('button');
+                btn.innerText = 'Clear';
+                btn.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+
+                    Livewire.emit('resetSearchDate');
+                });
+
+                return btn;
+                }
+
             })
-          }
-
-        })
     </script>
 
 </div>

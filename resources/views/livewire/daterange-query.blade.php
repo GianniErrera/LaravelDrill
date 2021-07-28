@@ -14,17 +14,28 @@
 
         <script>
             const rangepicker= new Litepicker({
-            element: document.getElementById('searchRange'),
-            format: 'DD-MM-YYYY',
-            singleMode: false,
-            resetButton: true,
-            setup: (picker) => {
+                element: document.getElementById('searchRange'),
+                format: 'DD-MM-YYYY',
+                singleMode: false,
+                resetButton: true,
+                setup: (picker) => {
 
-                picker.on('selected', (startDate, endDate) => {
-                    console.log(startDate, endDate);
-                    Livewire.emit('searchRange', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
-                })
-            }
+                    picker.on('selected', (startDate, endDate) => {
+                        console.log(startDate, endDate);
+                        Livewire.emit('searchRange', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
+                    })
+                },
+                resetButton: () => {
+                let btn = document.createElement('button');
+                btn.innerText = 'Clear';
+                btn.addEventListener('click', (evt) => {
+                    evt.preventDefault();
+
+                    Livewire.emit('resetDateRange');
+                });
+
+                return btn;
+                }
 
             })
         </script>

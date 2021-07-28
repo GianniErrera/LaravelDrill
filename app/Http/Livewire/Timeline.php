@@ -17,7 +17,11 @@ class Timeline extends Component
     public $endDate;
     public $ignoreYearFromQuery;
 
-    protected $listeners = ['refreshList' => '$refresh', "selectDate" => 'getSelectedDate', "searchRange" => 'searchRange'];
+    protected $listeners = ['refreshList' => '$refresh',
+                             "selectDate" => 'getSelectedDate',
+                             "searchRange" => 'searchRange',
+                             "resetSearchDate" => 'resetSearchDate',
+                             'resetDateRange' => 'resetDateRange'];
 
     protected $rules = [
         'endDate' => "after:startDate"
@@ -34,6 +38,17 @@ class Timeline extends Component
     public function searchRange($startDate, $endDate) {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+    }
+
+    public function resetSearchDate() {
+        $this->searchDate = "";
+        $this->resetPage();
+    }
+
+    public function resetDateRange() {
+        $this->startDate = "";
+        $this->endDate = "";
+        $this->resetPage();
     }
 
     public function updatedColumnOrderCriteria() {
