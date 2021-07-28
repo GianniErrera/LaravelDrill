@@ -2,8 +2,9 @@
 
     @livewire('reminders')
 
+    <br class="mb-4">
     <div class="flex justify-around">
-        <div class="mb-4">
+        <div class="mb-3">
 
             <select wire:model="columnOrderCriteria"
                 class="form-control ml-4">
@@ -13,7 +14,7 @@
         </div>
 
 
-        <div class="mb-3 ml-2">
+        <div class="mb-3">
             <label for="search" class="block text-center">Search events:</label>
             <input type="text"
                                 wire:model="search"
@@ -25,7 +26,7 @@
                                 >
 
         </div>
-        <div class="mb-3 ml-2">
+        <div class="mb-3">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
             id="searchRange"
@@ -35,29 +36,37 @@
         </div>
 
 
-        <div class="flex mr-4">
-            <label class="flex items-center">
-            <input
-            type="checkbox"
-            wire:model="ignoreYearFromQuery"
-            class="flex-none ">
-            <span class="ml-2">Search interval over all years</span>
-            </label>
+        <div class="mb-3">
+            <div class="block mb-2">
+                <span class="ml-2">Search interval over all years</span>
+            </div>
+            <div class="block text-center">
+                <input
+                type="checkbox"
+                wire:model="ignoreYearFromQuery"
+                class="flex-none ">
+            </div>
+
 
 
         </div>
 
-        <div class="mr-4 items-center">
-            <button
-                wire:click="removeFilters"
-                class="cursor-pointer align-center">
-                    <span class="text-center">Reset filters</span>
-                    <img
-                        src ="images/filter-remove.png"
-                        width="30"
-                        class="mr-2 transform hover:scale-110"
-                        >
-            </button>
+        <div>
+            <div class="block">
+                <span class="text-center">Reset filters</span>
+                <div class="text-center m-2">
+                    <button
+                        wire:click="removeFilters"
+                        class="cursor-pointer align-center">
+
+                            <img
+                                src ="images/filter-remove.png"
+                                width="30"
+                                class="transform hover:scale-110"
+                                >
+                    </button>
+                </div>
+            </div>
         </div>
 
         <div class="block">
@@ -76,6 +85,7 @@
         </div>
     </div>
 
+    <br class="mb-2">
 
     <div class="border border-b-gray-300 rounded-xl">
 
