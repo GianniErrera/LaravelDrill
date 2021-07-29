@@ -13,15 +13,16 @@
             <div class="flex p-4">
                 <div>
                     <div>
-                        <label for="start">Pick a date:</label>
+                        <label for="date" class="block text-center">Pick a date:</label>
 
-                        <input type="date"
+                        <input
                             wire:model="date"
                             id="date"
                             name="date"
                             value="{{old('date')}}"
-                            class="ml-4 mb-4"
+                            class="ml-4 mb-4 border border-gray-800"
                             >
+
                     </div>
 
                     <div>
@@ -33,15 +34,16 @@
 
 
 
-                <div class="ml-4 mr-4 mb-4  justify-center">
+                <div class="ml-6 mr-4 p-4 justify-center">
                     <div>
                         <input type="text"
                             wire:model="eventDescription"
                             id="eventDescription"
                             name="eventDescription"
                             value="{{old('eventDescription')}}"
+                            size="200"
                             placeholder="Event name and description"
-                            class="border border-gray-500 p-2"
+                            class="w-full border border-gray-500 p-2"
                             >
                     </div>
                     <div>
@@ -89,4 +91,24 @@
     </div>
 
 </div>
+
+<script>
+    const datepicker= new Litepicker({
+        element: document.getElementById('date'),
+        format: 'DD-MM-YYYY',
+        resetButton: true,
+        singleMode: true,
+        allowRepick: true,
+        autoRefresh: true,
+        splitView: true,
+        setup: (picker) => {
+
+            picker.on('selected', (date) => {
+            Livewire.emit('publishDate', date.format('YYYY-MM-DD'));
+            document.getElementById('date').value = date.format('YYYY-MM-DD')
+            })
+        },
+
+        })
+</script>
 

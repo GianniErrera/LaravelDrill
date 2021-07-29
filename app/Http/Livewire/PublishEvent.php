@@ -19,11 +19,6 @@ class PublishEvent extends Component
 
     ];
 
-    public function mount(EventInstance $event)
-    {
-
-
-    }
 
     public function publish()
     {

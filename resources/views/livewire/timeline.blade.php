@@ -188,6 +188,8 @@
                 btn.innerText = 'Clear';
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
+
+                    Livewire.emit('resetDateRange');
                 });
 
                 return btn;

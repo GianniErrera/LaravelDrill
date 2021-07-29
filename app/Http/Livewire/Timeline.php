@@ -53,6 +53,7 @@ class Timeline extends Component
     public function resetDateRange() {
         $this->startDate = "";
         $this->endDate = "";
+        $this->searchRange = "";
         $this->resetPage();
     }
 
