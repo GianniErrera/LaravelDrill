@@ -2,10 +2,8 @@
 
     @livewire('reminders')
 
-    <br class="mb-4">
-    <div class="flex justify-around">
-        <div class="mb-3">
-
+    <div class="lg:flex lg:justify-around">
+        <div>
             <select wire:model="columnOrderCriteria"
                 class="form-control ml-4">
                 <option value="created_at">Ordered by creation date</option>
@@ -14,25 +12,52 @@
         </div>
 
 
-        <div class="mb-3">
-            <label for="search" class="block text-center">Search events:</label>
-            <input type="text"
-                                wire:model="search"
-                                id="search"
-                                name="search"
-                                value="{{old('search')}}"
-                                placeholder=""
-                                class="border border-gray-800 mb-4 p-2"
-                                >
-
-        </div>
-        <div class="mb-3">
+        <div class="lg:mb-3 @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
             id="searchRange"
             name="searchRange"
             class="ml-4 mb-4 p-2 border border-gray-800"
             >
+        </div>
+
+        <div class="block @unless ($singleDateQuery)hidden @endunless">
+            <label for="date" class="block text-center">Pick a date:</label>
+
+            <input
+                wire:model="searchDate"
+                id="searchDate"
+                name="searchDate"
+                type="text"
+                class="ml-4 mb-4 p-2 border border-gray-800"
+                >
+
+        </div>
+
+        <div class="lg:mb-3">
+            <div class="block mb-2">
+                <span class="ml-2">Sigle date query</span>
+            </div>
+            <div class="block text-center">
+                <input
+                type="checkbox"
+                wire:model="singleDateQuery"
+                class="flex-none ">
+            </div>
+
+        </div>
+
+
+        <div class="mb-3">
+            <label for="search" class="block text-center">Search events:</label>
+            <input type="text"
+                    wire:model="search"
+                    id="search"
+                    name="search"
+                    value="{{old('search')}}"
+                    placeholder=""
+                    class="border border-gray-800 mb-4 p-2"
+                    >
         </div>
 
 
@@ -46,8 +71,6 @@
                 wire:model="ignoreYearFromQuery"
                 class="flex-none ">
             </div>
-
-
 
         </div>
 
@@ -69,20 +92,7 @@
             </div>
         </div>
 
-        <div class="block">
-            <label for="date" class="block text-center">Pick a date:</label>
 
-            <input
-                wire:model="searchDate"
-                id="searchDate"
-                name="searchDate"
-                type="text"
-                class="ml-4 mb-4 p-2 border border-gray-800"
-                class="border border-gray-500 p-2"
-                data-provide="picker"
-                >
-
-        </div>
     </div>
 
     <br class="mb-2">
@@ -153,7 +163,7 @@
                 });
 
                 return btn;
-                }
+            }
 
             })
     </script>

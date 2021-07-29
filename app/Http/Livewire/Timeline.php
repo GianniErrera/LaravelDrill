@@ -16,6 +16,7 @@ class Timeline extends Component
     public $startDate;
     public $endDate;
     public $ignoreYearFromQuery;
+    public $singleDateQuery;
 
     protected $listeners = ['refreshList' => '$refresh',
                              "selectDate" => 'getSelectedDate',
@@ -49,6 +50,19 @@ class Timeline extends Component
         $this->startDate = "";
         $this->endDate = "";
         $this->resetPage();
+    }
+
+    public function updatedSingleDateQuery() {
+        if($this->singleDateQuery) {
+            $this->startDate = "";
+            $this->endDate = "";
+            $this->resetPage();
+        }
+        else {
+            $this->searchDate = "";
+            $this->resetPage();
+        }
+
     }
 
     public function updatedColumnOrderCriteria() {
@@ -89,8 +103,7 @@ class Timeline extends Component
        $this->resetPage(); // this should always be triggered
    }
 
-   public function hydrate()
-    {
+   public function hydrate() {
         $this->resetErrorBag();
         $this->resetValidation();
     }
