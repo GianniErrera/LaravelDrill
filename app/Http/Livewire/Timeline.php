@@ -17,6 +17,7 @@ class Timeline extends Component
     public $endDate;
     public $ignoreYearFromQuery;
     public $singleDateQuery;
+    public $searchRange;
 
     protected $listeners = ['refreshList' => '$refresh',
                              "selectDate" => 'getSelectedDate',
@@ -27,6 +28,8 @@ class Timeline extends Component
     protected $rules = [
         'endDate' => "after:startDate"
     ];
+
+
     public function getSelectedDate( $date ) {
         $this->searchDate = $date;
         $this->resetPage();
@@ -39,6 +42,7 @@ class Timeline extends Component
     public function searchRange($startDate, $endDate) {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->searchRange = $this->startDate . " - " . $this->endDate;
     }
 
     public function resetSearchDate() {
@@ -53,15 +57,12 @@ class Timeline extends Component
     }
 
     public function updatedSingleDateQuery() {
-        if($this->singleDateQuery) {
-            $this->startDate = "";
-            $this->endDate = "";
-            $this->resetPage();
-        }
-        else {
-            $this->searchDate = "";
-            $this->resetPage();
-        }
+        $this->startDate = "";
+        $this->endDate = "";
+        $this->searchDate = "";
+        $this->searchRange = "";
+        $this->resetPage();
+
 
     }
 
@@ -88,6 +89,9 @@ class Timeline extends Component
     public function updatedEndDate() {
         if($this->startDate && !$this->ignoreYearFromQuery) {
             $this->validate();
+        }
+        if($this->startDate) {
+            dd($this->startDate + " - " + $this->endDate);
         }
         $this->resetPage(); // this should always be triggered
     }

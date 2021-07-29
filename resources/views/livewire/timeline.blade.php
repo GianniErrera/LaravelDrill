@@ -15,11 +15,13 @@
         <div class="lg:mb-3 @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
-            id="searchRange"
-            name="searchRange"
-            class="ml-4 mb-4 p-2 border border-gray-800"
+                wire:model="searchRange"
+                id="searchRange"
+                name="searchRange"
+                class="ml-4 mb-4 p-2 border border-gray-800"
             >
         </div>
+
 
         <div class="block @unless ($singleDateQuery)hidden @endunless">
             <label for="date" class="block text-center">Pick a date:</label>
@@ -149,7 +151,7 @@
             setup: (picker) => {
 
                 picker.on('selected', (date) => {
-                    Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
+                Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
                 document.getElementById('searchDate').value = date.format('YYYY-MM-DD')
                 })
             },
@@ -186,14 +188,14 @@
                 btn.innerText = 'Clear';
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
-
-                    Livewire.emit('resetDateRange');
                 });
 
                 return btn;
                 }
 
             })
+
+
     </script>
 
 </div>
