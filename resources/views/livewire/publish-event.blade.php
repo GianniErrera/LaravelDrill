@@ -21,6 +21,7 @@
                             name="date"
                             value="{{old('date')}}"
                             class="ml-4 mb-4 border border-gray-800"
+                            readonly
                             >
 
                     </div>

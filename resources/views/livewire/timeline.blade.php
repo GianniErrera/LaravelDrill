@@ -3,7 +3,7 @@
     @livewire('reminders')
 
     <div class="lg:flex lg:justify-around">
-        <div>
+        <div class="text-center">
             <select wire:model="columnOrderCriteria"
                 class="form-control ml-4">
                 <option value="created_at">Ordered by creation date</option>
@@ -12,13 +12,14 @@
         </div>
 
 
-        <div class="lg:mb-3 @if($singleDateQuery) hidden @endif">
+        <div class="lg:mb-3 text-center @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
                 wire:model="searchRange"
                 id="searchRange"
                 name="searchRange"
                 class="ml-4 mb-4 p-2 border border-gray-800"
+                readonly
             >
         </div>
 
@@ -32,38 +33,42 @@
                 name="searchDate"
                 type="text"
                 class="ml-4 mb-4 p-2 border border-gray-800"
-                >
+                readonly
+            >
 
         </div>
 
-        <div class="lg:mb-3">
+        <div class="lg:mb-3 text-center">
             <div class="block mb-2">
-                <span class="ml-2">Sigle date query</span>
+                <span class="ml-2 text-center">Sigle date query</span>
             </div>
             <div class="block text-center">
                 <input
-                type="checkbox"
-                wire:model="singleDateQuery"
-                class="flex-none ">
+                    type="checkbox"
+                    wire:model="singleDateQuery"
+                    class="flex-none"
+                >
             </div>
 
         </div>
 
 
-        <div class="mb-3">
+        <div class="mb-3 text-center ">
             <label for="search" class="block text-center">Search events:</label>
-            <input type="text"
-                    wire:model="search"
-                    id="search"
-                    name="search"
-                    value="{{old('search')}}"
-                    placeholder=""
-                    class="border border-gray-800 mb-4 p-2"
-                    >
+
+            <input
+                type="text"
+                wire:model="search"
+                id="search"
+                name="search"
+                value="{{old('search')}}"
+                placeholder=""
+                class="border border-gray-800 mb-4 p-2"
+            >
         </div>
 
 
-        <div class="mb-3">
+        <div class="mb-3 text-center">
             <div class="block mb-2">
                 <span class="ml-2">Search interval over all years</span>
             </div>
@@ -77,8 +82,8 @@
         </div>
 
         <div>
-            <div class="block">
-                <span class="text-center">Reset filters</span>
+            <div class="block text-center">
+                <span class="ml-2 text-center">Reset filters</span>
                 <div class="text-center m-2">
                     <button
                         wire:click="removeFilters"
@@ -176,6 +181,7 @@
                 format: 'DD-MM-YYYY',
                 singleMode: false,
                 resetButton: true,
+                position: "top left",
                 setup: (picker) => {
 
                     picker.on('selected', (startDate, endDate) => {
@@ -188,8 +194,8 @@
                 btn.innerText = 'Clear';
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
-
-                    Livewire.emit('resetDateRange');
+/*
+                    Livewire.emit('resetDateRange'); */
                 });
 
                 return btn;
