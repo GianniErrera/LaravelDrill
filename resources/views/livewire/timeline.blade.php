@@ -181,7 +181,6 @@
                 format: 'DD-MM-YYYY',
                 singleMode: false,
                 resetButton: true,
-                position: "top left",
                 setup: (picker) => {
 
                     picker.on('selected', (startDate, endDate) => {

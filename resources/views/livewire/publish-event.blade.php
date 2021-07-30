@@ -1,19 +1,19 @@
 <div class="mt-4">
     <div>
         @if (session()->has('message'))
-        <div class="p-3 bg-green-300 text-green-800 rounded shadow-sm">
+        <div class="p-3 bg-green-300 lg:text-green-800 rounded shadow-sm">
             {{ session('message') }}
         </div>
         @endif
     </div>
 
-    <div class="border border-blue-400 rounded-lg px-8 py-6 ml-6 mb-6 mr-2">
+    <div class="border border-blue-400 rounded-lg px-8 py-6 lg:ml-6 mb-6 mr-2 md:mx-auto">
         <form wire:submit.prevent="publish">
 
-            <div class="flex p-4">
-                <div>
+            <div class="lg:flex p-4 text-center">
+                <div class="lg:ml-6 lg:mr-4 lg:p-4 mb-6 text-center">
                     <div>
-                        <label for="date" class="block text-center">Pick a date:</label>
+                        <span class="block mb-2 text-center">Pick a date:</span>
 
                         <input
                             wire:model="date"
@@ -35,14 +35,17 @@
 
 
 
-                <div class="ml-6 mr-4 p-4 justify-center">
+                <div class="lg:ml-6 lg:mr-4 lg:p-4 mb-6 justify-center">
+                    <div class="block mb-2">
+                        <span class="text-sm lg:invisible">Event name and description   </span>
+                    </div>
                     <div>
                         <input type="text"
                             wire:model="eventDescription"
                             id="eventDescription"
                             name="eventDescription"
                             value="{{old('eventDescription')}}"
-                            size="200"
+                            size="400"
                             placeholder="Event name and description"
                             class="w-full border border-gray-500 p-2"
                             >
@@ -83,7 +86,7 @@
 
                 <button
                     type="submit"
-                    class="bg-indigo-500 rounded-lg shadow p-2 mr-2 text-white"
+                    class="bg-indigo-500 rounded-lg shadow p-2 ml-2 mr-2 text-white"
                     >Publish event
                 </button>
 
