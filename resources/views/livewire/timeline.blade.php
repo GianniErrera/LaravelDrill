@@ -12,19 +12,20 @@
         </div>
 
 
-        <div class="lg:mb-3 text-center @if($singleDateQuery) hidden @endif">
+        <div class="lg:mb-3 block text-center @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
                 wire:model="searchRange"
                 id="searchRange"
                 name="searchRange"
+                type="text"
                 class="ml-4 mb-4 p-2 border border-gray-800"
                 readonly
             >
         </div>
 
 
-        <div class="block @unless ($singleDateQuery)hidden @endunless">
+        <div class="block text-center @unless ($singleDateQuery)hidden @endunless">
             <label for="date" class="block text-center">Pick a date:</label>
 
             <input
@@ -109,7 +110,7 @@
         @forelse ($events as $event)
         <div class="p-4 border-b border-b-gray-400 rounded-xl ml-2 mr-2' }}">
             <div class="flex flex-row justify-between">
-                <div>
+                <div class="w-3/5">
                     <div>
                         <p class="text-sm mb-3"> {{ $event->date }} </p>
                     </div>
@@ -117,8 +118,8 @@
                         <p class="text-sm mb-3"> {{ $event->eventDescription }} </p>
                     </div>
                 </div>
-                <div class= "flex">
-                    <div class="icon-container col-xs-12 col-sm-4 mr-2 p-4">
+                <div class="flex">
+                    <div class="icon-container col-xs-12 col-sm-4 lg:mr-2 p-4">
                         @if($event->yearly())
                         <div>
                             <div>
@@ -127,7 +128,7 @@
                         </div>
                         @endif
                     </div>
-                    <div class="mr-4">
+                    <div class="lg:mr-4">
                         <button class="btn bg-blue-600 text-white rounded-xl p-2 cursor-pointer hover:bg-blue-800"
                             id="copyToClipboard"
                             data-clipboard-text="{{$event->eventDescription . " - " . date_format(date_create($event->date), "F m, Y")}}">
