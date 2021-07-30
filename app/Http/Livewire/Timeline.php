@@ -76,7 +76,6 @@ class Timeline extends Component
     }
 
     public function updatedSearchDate() {
-        dd($this->searchDate);
         $this->resetPage();
     }
 
@@ -91,9 +90,7 @@ class Timeline extends Component
         if($this->startDate && !$this->ignoreYearFromQuery) {
             $this->validate();
         }
-        if($this->startDate) {
-            dd($this->startDate + " - " + $this->endDate);
-        }
+
         $this->resetPage(); // this should always be triggered
     }
 

@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\CreateEvent;
+use App\Http\Livewire\Timeline;
 use App\Models\User;
 use App\Models\EventInstance;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -39,7 +39,7 @@ class TimelineTest extends TestCase
             'date' => '2018-01-23']);
 
 
-            Livewire::test('timeline')
+            Livewire::test(Timeline::class)
             ->set('ignoreYearFromQuery', false)
             ->set('startDate', '2016-12-23')
             ->set('endDate', '2018-01-24')
@@ -65,7 +65,7 @@ class TimelineTest extends TestCase
             'date' => '2018-01-23']);
 
 
-            Livewire::test('timeline')
+            Livewire::test(Timeline::class)
             ->set('ignoreYearFromQuery', false)
             ->set('startDate', '2019-01-20')
             ->set('endDate', '2019-01-24')
@@ -80,7 +80,7 @@ class TimelineTest extends TestCase
     public function startDateAfterEndDate() {
 
 
-        Livewire::test('timeline')
+        Livewire::test(Timeline::class)
         ->set('ignoreYearFromQuery', false)
         ->set('startDate', '2018-01-20')
         ->set('endDate', '2018-01-10')

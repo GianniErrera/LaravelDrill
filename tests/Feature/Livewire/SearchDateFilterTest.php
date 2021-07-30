@@ -2,7 +2,7 @@
 
 namespace Tests\Feature\Livewire;
 
-use App\Http\Livewire\CreateEvent;
+use App\Http\Livewire\Timeline;
 use App\Models\User;
 use App\Models\EventInstance;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -28,7 +28,7 @@ class SearchDateFilterTest extends TestCase
             'isItRecurringYearly' => false,
             'date' => '1715-01-23']);
 
-            Livewire::test('timeline')
+            Livewire::test(Timeline::class)
             ->set('searchDate', "1802-12-23")
             ->assertSee('foo')
             ->assertDontSee('fool');
@@ -48,7 +48,7 @@ class SearchDateFilterTest extends TestCase
             'isItRecurringYearly' => false,
             'date' => '1715-01-23']);
 
-            Livewire::test('timeline')
+            Livewire::test(Timeline::class)
             ->set('searchDate', "date")
             ->assertDontSee('foo');
 

@@ -3,7 +3,7 @@
     @livewire('reminders')
 
     <div class="lg:flex lg:justify-around">
-        <div class="text-center">
+        <div class="text-center mb-4">
             <select wire:model="columnOrderCriteria"
                 class="form-control ml-4">
                 <option value="created_at">Ordered by creation date</option>
@@ -12,7 +12,7 @@
         </div>
 
 
-        <div class="lg:mb-3 block text-center @if($singleDateQuery) hidden @endif">
+        <div class="mb-3 block text-center @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center">Search over dates range:</label>
             <input
                 wire:model="searchRange"
@@ -25,7 +25,7 @@
         </div>
 
 
-        <div class="block text-center @unless ($singleDateQuery)hidden @endunless">
+        <div class="block md:mb-4 text-center @unless ($singleDateQuery)hidden @endunless">
             <label for="date" class="block text-center">Pick a date:</label>
 
             <input
@@ -39,7 +39,7 @@
 
         </div>
 
-        <div class="lg:mb-3 text-center">
+        <div class="mb-3 text-center">
             <div class="block mb-2">
                 <span class="ml-2 text-center">Sigle date query</span>
             </div>
@@ -83,7 +83,7 @@
         </div>
 
         <div>
-            <div class="block text-center">
+            <div class="block text-center mb-">
                 <span class="ml-2 text-center">Reset filters</span>
                 <div class="text-center m-2">
                     <button
@@ -110,7 +110,7 @@
         @forelse ($events as $event)
         <div class="p-4 border-b border-b-gray-400 rounded-xl ml-2 mr-2' }}">
             <div class="flex flex-row justify-between">
-                <div class="w-3/5">
+                <div class="w-2/5">
                     <div>
                         <p class="text-sm mb-3"> {{ $event->date }} </p>
                     </div>
@@ -118,7 +118,7 @@
                         <p class="text-sm mb-3"> {{ $event->eventDescription }} </p>
                     </div>
                 </div>
-                <div class="flex">
+                <div class="flex items-center">
                     <div class="icon-container col-xs-12 col-sm-4 lg:mr-2 p-4">
                         @if($event->yearly())
                         <div>
