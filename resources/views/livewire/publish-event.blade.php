@@ -20,7 +20,7 @@
                             id="date"
                             name="date"
                             value="{{old('date')}}"
-                            class="ml-4 mb-4 border border-gray-800"
+                            class="ml-4 mb-4 input input-border border-gray-800"
                             readonly
                             >
 
@@ -47,7 +47,7 @@
                             value="{{old('eventDescription')}}"
                             size="400"
                             placeholder="Event name and description"
-                            class="w-full border border-gray-500 p-2"
+                            class="w-full input input-border border border-gray-500 p-2"
                             >
                     </div>
                     <div>
@@ -61,11 +61,11 @@
 
             </div>
 
-            <div class="flex mt-6 mb-6">
+            <div class="flex ml-10 mt-6 mb-6">
                 <label class="flex items-center cursor-pointer">
                     <input type="checkbox"
                         wire:model="isItYearly"
-                        class="form-checkbox cursor-pointer"
+                        class="toggle cursor-pointer"
                         value="{{$isItYearly}}">
                     <span class="ml-2">Does this event recurr every year?</span>
                 </label>
@@ -76,8 +76,8 @@
             <hr class="mb-4">
 
             <footer class="flex justify-between items-center mr-4">
-                <div class="flex items-center">
-                    <img class="rounded-full"
+                <div class="flex items-center ml-10">
+                    <img class="mask mask-diamond"
                         src="https://i.pravatar.cc/500?u={{auth()->user()->email}}"
                         width="65"
                         alt="">
@@ -86,7 +86,7 @@
 
                 <button
                     type="submit"
-                    class="bg-indigo-500 rounded-lg shadow p-2 ml-2 mr-2 text-white"
+                    class="btn btn-primary rounded-xl hover:text-yellow-100"
                     >Publish event
                 </button>
 

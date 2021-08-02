@@ -5,49 +5,49 @@
     <div class="lg:flex lg:justify-around">
         <div class="text-center mb-4">
             <select wire:model="columnOrderCriteria"
-                class="form-control ml-4">
+                class="select select-bordered">
                 <option value="created_at">Ordered by creation date</option>
                 <option value="date">Ordered by date</option>
             </select>
         </div>
 
 
-        <div class="mb-3 block text-center @if($singleDateQuery) hidden @endif">
-            <label for="search" class="block text-center">Search over dates range:</label>
+        <div class="md:mb-3 block text-center @if($singleDateQuery) hidden @endif">
+            <label for="search" class="block text-center mb-3 font-size-14px">Search over dates range:</label>
             <input
                 wire:model="searchRange"
                 id="searchRange"
                 name="searchRange"
                 type="text"
-                class="ml-4 mb-4 p-2 border border-gray-800"
+                class="ml-4 mb-4 p-2 input input-border border border-gray-800"
                 readonly
             >
         </div>
 
 
-        <div class="block md:mb-4 text-center @unless ($singleDateQuery)hidden @endunless">
-            <label for="date" class="block text-center">Pick a date:</label>
+        <div class="block md:mb-3 text-center @unless ($singleDateQuery)hidden @endunless">
+            <label for="date" class="block text-center mb-3">Pick a date:</label>
 
             <input
                 wire:model="searchDate"
                 id="searchDate"
                 name="searchDate"
                 type="text"
-                class="ml-4 mb-4 p-2 border border-gray-800"
+                class="ml-4 mb-4 p-2 input input-border border border-gray-800"
                 readonly
             >
 
         </div>
 
         <div class="mb-3 text-center">
-            <div class="block mb-2">
-                <span class="ml-2 text-center">Sigle date query</span>
+            <div class="block mb-5">
+                <span class="text-center">Sigle date query</span>
             </div>
             <div class="block text-center">
                 <input
                     type="checkbox"
                     wire:model="singleDateQuery"
-                    class="flex-none"
+                    class="flex-none checkbox"
                 >
             </div>
 
@@ -55,7 +55,7 @@
 
 
         <div class="mb-3 text-center ">
-            <label for="search" class="block text-center">Search events:</label>
+            <label for="search" class="block text-center mb-3">Search events:</label>
 
             <input
                 type="text"
@@ -64,20 +64,20 @@
                 name="search"
                 value="{{old('search')}}"
                 placeholder=""
-                class="border border-gray-800 mb-4 p-2"
+                class="input input-border border border-gray-800 mb-4 p-2"
             >
         </div>
 
 
         <div class="mb-3 text-center">
-            <div class="block mb-2">
-                <span class="ml-2">Search interval over all years</span>
+            <div class="block mb-5">
+                <span class="text-center">Search interval over all years</span>
             </div>
             <div class="block text-center">
                 <input
                 type="checkbox"
                 wire:model="ignoreYearFromQuery"
-                class="flex-none ">
+                class="flex-none checkbox">
             </div>
 
         </div>
@@ -129,7 +129,7 @@
                         @endif
                     </div>
                     <div class="lg:mr-4">
-                        <button class="btn bg-blue-600 text-white rounded-xl p-2 cursor-pointer hover:bg-blue-800"
+                        <button class="btn btn-primary hover:text-yellow-100"
                             id="copyToClipboard"
                             data-clipboard-text="{{$event->eventDescription . " - " . date_format(date_create($event->date), "F m, Y")}}">
                             Copy to clipboard

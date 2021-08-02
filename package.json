@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "clipboard": "^2.0.8",
+        "daisyui": "^1.10.0",
         "litepicker": "^2.0.11"
     }
 }
