@@ -3,7 +3,7 @@
     @livewire('reminders')
 
     <div class="lg:flex lg:justify-around">
-        <div class="text-center mb-4">
+        <div class="text-center mb-4 mt-8">
             <select wire:model="columnOrderCriteria"
                 class="select select-bordered">
                 <option value="created_at">Ordered by creation date</option>
@@ -13,7 +13,7 @@
 
 
         <div class="md:mb-3 block text-center @if($singleDateQuery) hidden @endif">
-            <label for="search" class="block text-center mb-3 font-size-14px">Search over dates range:</label>
+            <label for="search" class="block text-center mb-3 font-size-14px font-semibold">Search over dates range:</label>
             <input
                 wire:model="searchRange"
                 id="searchRange"
@@ -26,7 +26,7 @@
 
 
         <div class="block md:mb-3 text-center @unless ($singleDateQuery)hidden @endunless">
-            <label for="date" class="block text-center mb-3">Pick a date:</label>
+            <label for="date" class="block text-center mb-3 font-semibold">Pick a date:</label>
 
             <input
                 wire:model="searchDate"
@@ -41,7 +41,7 @@
 
         <div class="mb-3 text-center">
             <div class="block mb-5">
-                <span class="text-center">Sigle date query</span>
+                <span class="text-center font-semibold">Sigle date query</span>
             </div>
             <div class="block text-center">
                 <input
@@ -55,7 +55,7 @@
 
 
         <div class="mb-3 text-center ">
-            <label for="search" class="block text-center mb-3">Search events:</label>
+            <label for="search" class="block text-center mb-3 font-semibold">Search events:</label>
 
             <input
                 type="text"
@@ -71,7 +71,7 @@
 
         <div class="mb-3 text-center">
             <div class="block mb-5">
-                <span class="text-center">Search interval over all years</span>
+                <span class="text-center font-semibold">Search interval over all years</span>
             </div>
             <div class="block text-center">
                 <input
@@ -84,8 +84,8 @@
 
         <div>
             <div class="block text-center mb-">
-                <span class="ml-2 text-center">Reset filters</span>
-                <div class="text-center m-2">
+                <span class="ml-2 text-center font-semibold">Reset filters</span>
+                <div class="text-center m-4">
                     <button
                         wire:click="removeFilters"
                         class="cursor-pointer align-center">
@@ -110,12 +110,12 @@
         @forelse ($events as $event)
         <div class="p-4 border-b border-b-gray-400 rounded-xl ml-2 mr-2' }}">
             <div class="flex flex-row justify-between">
-                <div class="w-2/5">
+                <div class="w-1/3">
                     <div>
-                        <p class="text-sm mb-3"> {{ $event->date }} </p>
+                        <p class="mb-3"> {{ $event->date }} </p>
                     </div>
                     <div>
-                        <p class="text-sm mb-3"> {{ $event->eventDescription }} </p>
+                        <p class="mb-3 leading-relaxed"> {{ $event->eventDescription }} </p>
                     </div>
                 </div>
                 <div class="flex items-center">

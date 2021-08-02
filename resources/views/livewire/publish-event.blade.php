@@ -13,7 +13,7 @@
             <div class="lg:flex p-4 text-center">
                 <div class="lg:ml-6 lg:mr-4 lg:p-4 mb-6 text-center">
                     <div>
-                        <span class="block mb-2 text-center">Pick a date:</span>
+                        <span class="block mb-2 text-center font-semibold">Pick a date:</span>
 
                         <input
                             wire:model="date"
@@ -37,7 +37,7 @@
 
                 <div class="lg:ml-6 lg:mr-4 lg:p-4 mb-6 justify-center">
                     <div class="block mb-2">
-                        <span class="text-sm lg:invisible">Event name and description   </span>
+                        <span class="text-sm lg:invisible font-semibold">Event name and description   </span>
                     </div>
                     <div>
                         <input type="text"
@@ -67,7 +67,7 @@
                         wire:model="isItYearly"
                         class="toggle cursor-pointer"
                         value="{{$isItYearly}}">
-                    <span class="ml-2">Does this event recurr every year?</span>
+                    <span class="ml-2 font-semibold">Does this event recur every year?</span>
                 </label>
             </div>
 
