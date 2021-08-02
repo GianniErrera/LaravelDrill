@@ -19,7 +19,7 @@
                 id="searchRange"
                 name="searchRange"
                 type="text"
-                class="ml-4 mb-4 p-2 input input-border border border-gray-800"
+                class="ml-4 mb-4 p-2 input input-bordered border border-gray-800"
                 readonly
             >
         </div>
@@ -33,7 +33,7 @@
                 id="searchDate"
                 name="searchDate"
                 type="text"
-                class="ml-4 mb-4 p-2 input input-border border border-gray-800"
+                class="ml-4 mb-4 p-2 input input-bordered border border-gray-800"
                 readonly
             >
 
@@ -64,7 +64,7 @@
                 name="search"
                 value="{{old('search')}}"
                 placeholder=""
-                class="input input-border border border-gray-800 mb-4 p-2"
+                class="input input-bordered border border-gray-800 mb-4 p-2"
             >
         </div>
 

@@ -20,7 +20,7 @@
                             id="date"
                             name="date"
                             value="{{old('date')}}"
-                            class="ml-4 mb-4 input input-border border-gray-800"
+                            class="ml-4 mb-4 input input-bordered border-gray-800"
                             readonly
                             >
 
