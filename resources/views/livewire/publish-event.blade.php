@@ -11,7 +11,7 @@
         <form wire:submit.prevent="publish">
 
             <div class="lg:flex p-4 text-center">
-                <div class="lg:ml-6 lg:mr-4 lg:p-4 mb-6 text-center">
+                <div class="lg:mr-4 lg:p-4 mb-6 text-center">
                     <div>
                         <span class="block mb-2 text-center font-semibold">Pick a date:</span>
 
@@ -61,7 +61,7 @@
 
             </div>
 
-            <div class="flex ml-10 mt-6 mb-6">
+            <div class="flex ml-5 mt-6 mb-6">
                 <label class="flex items-center cursor-pointer">
                     <input type="checkbox"
                         wire:model="isItYearly"
