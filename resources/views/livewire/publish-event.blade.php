@@ -77,10 +77,7 @@
 
             <footer class="flex justify-between items-center mr-4">
                 <div class="flex items-center ml-10">
-                    <img class="mask mask-diamond"
-                        src="https://i.pravatar.cc/500?u={{auth()->user()->email}}"
-                        width="65"
-                        alt="">
+                   # just a placeholder so that other div inside flex div floats to the right
                 </div>
 
 

@@ -115,7 +115,7 @@ class Timeline extends Component
         return view('livewire.timeline',
             ['events' => EventInstance::
                 search($this->search)->
-                searchDate($this->searchDate)->
+                searchDate($this->ignoreYearFromQuery, $this->searchDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
                 orderBy($this->columnOrderCriteria)->paginate(10)
             ]);

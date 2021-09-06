@@ -18,8 +18,15 @@ class EventInstance extends Model
         'isItRecurringYearly'
     ];
 
-    public function scopeSearchDate($query, $searchDate) {
-        return ($searchDate != null) ? $query->whereDate('date', '=', $searchDate) : $query;
+    public function scopeSearchDate($query, $ignoreYearFromQuery, $searchDate) {
+        if($ignoreYearFromQuery == false) {
+            return ($searchDate != null) ? $query->whereDate('date', '=', $searchDate) : $query;
+        } elseif ($ignoreYearFromQuery == true && $searchDate != "") {
+            $month = date_format(date_create($searchDate), 'm');
+            $day = date_format(date_create($searchDate), 'd');
+            return $query->whereMonth('date', $month)
+             ->whereDay('date', $day);
+         }
     }
 
     public function scopeSearch($query, $search) {

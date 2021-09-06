@@ -48,7 +48,7 @@
                         wire:model="isItYearly"
                         class="form-checkbox"
                         value="checked">
-                    <span class="ml-2">Does this event recurr every year?</span></span>
+                    <span class="ml-2">Does this event recur every year?</span></span>
                 </label>
             </div>
 
