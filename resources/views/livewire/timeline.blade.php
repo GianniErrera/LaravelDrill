@@ -154,6 +154,7 @@
             singleMode: true,
             allowRepick: true,
             autoRefresh: true,
+            dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
             setup: (picker) => {
 
                 picker.on('selected', (date) => {
@@ -182,6 +183,7 @@
                 format: 'DD-MM-YYYY',
                 singleMode: false,
                 resetButton: true,
+                dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
                 setup: (picker) => {
 
                     picker.on('selected', (startDate, endDate) => {
