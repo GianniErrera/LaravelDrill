@@ -105,6 +105,17 @@
 
     <br class="mb-2">
 
+    <div>
+        @if (session()->has('message'))
+            <div class="success">
+
+                {{ session('message') }}
+
+            </div>
+
+        @endif
+    </div>
+
     <div class="border border-b-gray-300 rounded-xl">
 
         @forelse ($events as $event)

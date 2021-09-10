@@ -117,7 +117,7 @@ class Timeline extends Component
                 search($this->search)->
                 searchDate($this->ignoreYearFromQuery, $this->searchDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
-                orderBy($this->columnOrderCriteria)->paginate(10)
+                orderBy($this->columnOrderCriteria, "desc")->paginate(10)
             ]);
     }
 }

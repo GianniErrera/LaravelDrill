@@ -35,7 +35,7 @@ class PublishEvent extends Component
         $event->save();
         $this->emitTo('timeline', 'refreshList');
         $this->reset(['date', 'eventDescription', 'isItYearly']);
-
+        session()->flash('message', 'Event successfully published.');
     }
 
     public function render()
