@@ -1,4 +1,4 @@
-# Laravel drill
+# Laravel drill using Livewire components
 
 With this Laravel project, I have been practicing on the use of filters, along with that of Livewire components. 
 

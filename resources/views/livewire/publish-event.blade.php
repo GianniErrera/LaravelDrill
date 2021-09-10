@@ -75,10 +75,8 @@
 
             <hr class="mb-4">
 
-            <footer class="flex justify-between items-center mr-4">
-                <div class="flex items-center ml-10">
-                   # just a placeholder so that other div inside flex div floats to the right
-                </div>
+            <footer class="text-center lg:text-right lg:mr-0 items-center mr-4">
+
 
 
                 <button
@@ -107,7 +105,7 @@
 
             picker.on('selected', (date) => {
             Livewire.emit('publishDate', date.format('YYYY-MM-DD'));
-            document.getElementById('date').value = date.format('YYYY-MM-DD')
+            document.getElementById('date').value = date.format('YYYY-MM-DD');
             })
         },
 

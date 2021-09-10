@@ -13,12 +13,17 @@ class PublishEvent extends Component
     public $isItYearly;
     public $eventDescription;
 
+    protected $listeners = ['publishDate' => 'setDate'];
+
     protected $rules = [
         'date' => 'required|date',
         'eventDescription' => 'required|string|max:180'
 
     ];
 
+    public function setDate($date) {
+        $this->date = $date;
+    }
 
     public function publish()
     {
