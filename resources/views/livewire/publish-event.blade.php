@@ -16,10 +16,10 @@
                         <span class="block mb-2 text-center font-semibold">Pick a date:</span>
 
                         <input
-                            wire:model="date"
+                            wire:model="dateForHumans"
                             id="date"
                             name="date"
-                            value="{{old('date')}}"
+                            value="{{old('dateForHumans')}}"
                             class="ml-4 mb-4 input input-bordered border-gray-800"
                             readonly
                             >
@@ -72,7 +72,6 @@
             </div>
 
 
-
             <hr class="mb-4">
 
             <footer class="text-center lg:text-right lg:mr-0 items-center mr-4">
@@ -94,7 +93,7 @@
 <script>
     const datepicker= new Litepicker({
         element: document.getElementById('date'),
-        format: 'DD-MM-YYYY',
+        format: 'D-MMMM-YYYY',
         resetButton: true,
         singleMode: true,
         allowRepick: true,
@@ -104,11 +103,19 @@
         setup: (picker) => {
 
             picker.on('selected', (date) => {
+
             Livewire.emit('publishDate', date.format('YYYY-MM-DD'));
-            document.getElementById('date').value = date.format('YYYY-MM-DD');
             })
         },
 
         })
+
+
+
+        Livewire.on('eventPublished', () => {
+            console.log('so far so good');
+        })
+
+
 </script>
 

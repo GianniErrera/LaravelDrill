@@ -18,19 +18,20 @@ class Timeline extends Component
     public $ignoreYearFromQuery;
     public $singleDateQuery;
     public $searchRange;
+    public $dateForHumans;
 
-    protected $listeners = ['refreshList' => '$refresh',
-                             "selectDate" => 'getSelectedDate',
-                             "searchRange" => 'searchRange',
-                             "resetSearchDate" => 'resetSearchDate',
-                             'resetDateRange' => 'resetDateRange'];
+    protected $listeners = ["refreshList" => '$refresh',
+                            "selectDate" => "getSelectedDate",
+                            "searchRange" => "searchRange",
+                            "resetSearchDate" => "resetSearchDate",
+                            "resetDateRange" => "resetDateRange"];
 
     protected $rules = [
         'endDate' => "after:startDate"
     ];
 
 
-    public function getSelectedDate( $date ) {
+    public function getSelectedDate( $dateForHumans ) {
         $this->searchDate = $date;
         $this->resetPage();
     }

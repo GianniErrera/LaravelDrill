@@ -12,6 +12,7 @@ class PublishEvent extends Component
     public $date;
     public $isItYearly;
     public $eventDescription;
+    public $dateForHumans;
 
     protected $listeners = ['publishDate' => 'setDate'];
 
@@ -23,6 +24,7 @@ class PublishEvent extends Component
 
     public function setDate($date) {
         $this->date = $date;
+        $this->dateForHumans = date('j F Y', strtotime($this->date));
     }
 
     public function publish()
@@ -31,11 +33,12 @@ class PublishEvent extends Component
         $event = new EventInstance();
         $event->eventDescription = $this->eventDescription;
         $event->isItRecurringYearly = $this->isItYearly;
-        $event->date = $this->date;
+        $event->date = $this->date; // I have to change format since changing $date format changes also on display
         $event->save();
         $this->emitTo('timeline', 'refreshList');
-        $this->reset(['date', 'eventDescription', 'isItYearly']);
+        $this->reset(['date', 'eventDescription', 'isItYearly', 'dateForHumans']);
         session()->flash('message', 'Event successfully published.');
+        $this->emitSelf('EventPublished');
     }
 
     public function render()
