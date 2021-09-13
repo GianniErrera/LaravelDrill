@@ -32,12 +32,17 @@ class Timeline extends Component
 
     public function getSelectedDate($date) {
         $this->singleDate = $date;
+        $this->startDate = "";
+        $this->endDate = "";
+        $this->emit('clearRangeDatepicker');
         $this->resetPage();
     }
 
     public function getSearchRange($startDate, $endDate) {
         $this->startDate = $startDate;
         $this->endDate = $endDate;
+        $this->singleDate = "";
+        $this->emit('clearSingleDatepicker');
         $this->resetPage();
     }
 
@@ -48,22 +53,10 @@ class Timeline extends Component
         $this->emit('clearRangeDatepicker');
     }
 
-
-
-    public function updatedSingleDateQuery() {
-
-
-        if($this->singleDateQuery == true) { // if singlequery is true we clear the other picker and vice versa
-            $this->startDate = "";
-            $this->endDate = "";
-            $this->emit('clearSingleDatepicker');
-        } else {
-            $this->singleDate = "";
-            $this->emit('clearRangeDatepicker');
-        }
-        $this->resetPage(); // this sets paginator to 1
-
+    public function updatedSingleDate() {
+        dd('just checking');
     }
+
 
     public function updatedColumnOrderCriteria() {
         $this->resetPage();
