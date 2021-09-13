@@ -11,16 +11,16 @@
         <form wire:submit.prevent="publish">
 
             <div class="lg:flex p-4 text-center">
-                <div class="lg:mr-4 lg:p-4 mb-6 text-center">
+                <div class="lg:mr-4 lg:p-4 mb-2 text-center">
                     <div>
-                        <span class="text-sm block mb-2 text-center font-semibold">Pick a date:</span>
+                        <span class="text-sm block mb-3 text-center font-semibold">Pick a date:</span>
 
                         <input
                             wire:model="dateForHumans"
                             id="date"
                             name="date"
                             value="{{old('dateForHumans')}}"
-                            class="ml-4 mb-4 input input-bordered border-gray-800"
+                            class="ml-4 mb-4 p-2 input input-bordered border-gray-800"
                             readonly
                             >
 
@@ -47,7 +47,7 @@
                             value="{{old('eventDescription')}}"
                             size="400"
                             placeholder="Event name and description"
-                            class="w-full input input-border border border-gray-500 p-2"
+                            class="w-full input input-border border border-gray-500 mb-4 p-2 pl-4"
                             >
                     </div>
                     <div>
