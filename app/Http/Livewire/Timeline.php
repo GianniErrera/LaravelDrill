@@ -44,8 +44,8 @@ class Timeline extends Component
     public function removeFilters() {
         $this->reset();
         $this->resetPage();
-        $this->emit('resetSingleDatepicker');
-        $this->emit('resetRangeDatepicker');
+        $this->emit('clearSingleDatepicker');
+        $this->emit('clearRangeDatepicker');
     }
 
 
@@ -53,13 +53,13 @@ class Timeline extends Component
     public function updatedSingleDateQuery() {
 
 
-        if($this->singleDateQuery == true) { // if singlequery
+        if($this->singleDateQuery == true) { // if singlequery is true we clear the other picker and vice versa
             $this->startDate = "";
             $this->endDate = "";
-            $this->emit('resetSingleDatepicker');
+            $this->emit('clearSingleDatepicker');
         } else {
             $this->singleDate = "";
-            $this->emit('resetRangeDatepicker');
+            $this->emit('clearRangeDatepicker');
         }
         $this->resetPage(); // this sets paginator to 1
 

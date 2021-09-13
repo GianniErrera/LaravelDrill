@@ -195,7 +195,6 @@
                 dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
                 setup: (picker) => {
                     picker.on('selected', (startDate, endDate) => {
-                        console.log(startDate, endDate);
                         Livewire.emit('searchRange', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
                     })
                 },
@@ -226,16 +225,16 @@
 <script>
 
     window.addEventListener('load', () => { // this will clear single datepicker selection
-        Livewire.on('clearSinglePicker', () => {
+        Livewire.on('clearSingleDatepicker', () => {
         singlePicker.clearSelection();
         })
-        }, null);
+    });
 
-        window.addEventListener('load', () => { // this will clear rangepicker selection
-        Livewire.on('clearRangePicker', () => {
+    window.addEventListener('load', () => { // this will clear rangepicker selection
+        Livewire.on('clearRangeDatepicker', () => {
         rangePicker.clearSelection();
         })
-        }, null);
+    });
 
 </script>
 
