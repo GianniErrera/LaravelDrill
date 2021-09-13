@@ -79,31 +79,20 @@ class EventInstance extends Model
 
             }
 
-            elseif($startDate) { // these two elseifs are only triggered if checkbox is checked but only start date or end date is picked
-            $query->
-                whereMonth('date', '>', date_format(date_create($startDate), 'm'))->
-                orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))->
-                whereDay('date', '>=', date_format(date_create($startDate), 'd'));
+            else {
+                return $query;
             }
 
-            elseif($endDate) {
-            $query->
-                orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))-> // orWhere is needed as this is not logically concatenated to previous subquery
-                orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                whereDay('date', '<=', date_format(date_create($endDate), 'd'));
-            }
         }
 
         else { // date query when checkbox is not checked
-            if($startDate) {
+            if($startDate && $endDate) {
              $query->
-                whereDate('date', '>=', date_format(date_create($startDate), 'Y-m-d'));
-            }
-
-            if($endDate) {
-                $query->
+                whereDate('date', '>=', date_format(date_create($startDate), 'Y-m-d'))->
                 whereDate('date', '<=', date_format(date_create($endDate), 'Y-m-d'));
-               }
+            } else {
+                return $query;
+            }
         }
     }
 

@@ -12,17 +12,16 @@ class Timeline extends Component
 
     public $columnOrderCriteria = "created_at";
     public $search;
-    public $searchDate;
+    public $singleDate;
     public $startDate;
     public $endDate;
     public $ignoreYearFromQuery;
     public $singleDateQuery;
-    public $searchRange;
-    public $dateForHumans;
+
 
     protected $listeners = ["refreshList" => '$refresh',
-                            "selectDate" => "getSelectedDate",
-                            "searchRange" => "searchRange",
+                            "singleDate" => "getSelectedDate",
+                            "searchRange" => "getSearchRange",
                             "resetSearchDate" => "resetSearchDate",
                             "resetDateRange" => "resetDateRange"];
 
@@ -31,40 +30,38 @@ class Timeline extends Component
     ];
 
 
-    public function getSelectedDate( $dateForHumans ) {
-        $this->searchDate = $date;
+    public function getSelectedDate($date) {
+        $this->singleDate = $date;
+        $this->resetPage();
+    }
+
+    public function getSearchRange($startDate, $endDate) {
+        $this->startDate = $startDate;
+        $this->endDate = $endDate;
         $this->resetPage();
     }
 
     public function removeFilters() {
         $this->reset();
-    }
-
-    public function searchRange($startDate, $endDate) {
-        $this->startDate = $startDate;
-        $this->endDate = $endDate;
-        $this->searchRange = $this->startDate . " - " . $this->endDate;
-    }
-
-    public function resetSearchDate() {
-        $this->searchDate = "";
         $this->resetPage();
+        $this->emit('resetSingleDatepicker');
+        $this->emit('resetRangeDatepicker');
     }
 
-    public function resetDateRange() {
-        $this->startDate = "";
-        $this->endDate = "";
-        $this->searchRange = "";
-        $this->resetPage();
-    }
+
 
     public function updatedSingleDateQuery() {
-        $this->startDate = "";
-        $this->endDate = "";
-        $this->searchDate = "";
-        $this->searchRange = "";
-        $this->resetPage();
 
+
+        if($this->singleDateQuery == true) { // if singlequery
+            $this->startDate = "";
+            $this->endDate = "";
+            $this->emit('resetSingleDatepicker');
+        } else {
+            $this->singleDate = "";
+            $this->emit('resetRangeDatepicker');
+        }
+        $this->resetPage(); // this sets paginator to 1
 
     }
 
@@ -81,9 +78,7 @@ class Timeline extends Component
     }
 
     public function updatedStartDate() {
-        if($this->endDate && !$this->ignoreYearFromQuery) {
-            $this->validate();
-        }
+
         $this->resetPage(); // this should always be triggered
     }
 
@@ -116,7 +111,7 @@ class Timeline extends Component
         return view('livewire.timeline',
             ['events' => EventInstance::
                 search($this->search)->
-                searchDate($this->ignoreYearFromQuery, $this->searchDate)->
+                searchDate($this->ignoreYearFromQuery, $this->singleDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->
                 orderBy($this->columnOrderCriteria, "desc")->paginate(10)
             ]);

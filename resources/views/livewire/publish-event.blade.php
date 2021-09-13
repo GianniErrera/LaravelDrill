@@ -7,6 +7,7 @@
         @endif
     </div>
 
+
     <div class="border border-blue-400 rounded-lg px-8 py-6 lg:ml-6 mb-6 mr-2 md:mx-auto">
         <form wire:submit.prevent="publish">
 
@@ -101,21 +102,26 @@
         splitView: true,
         dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
         setup: (picker) => {
-
             picker.on('selected', (date) => {
-
-            Livewire.emit('publishDate', date.format('YYYY-MM-DD'));
+                Livewire.emit('publishDate', date.format('YYYY-MM-DD'));
             })
         },
 
-        })
+    })
 
 
-
-        Livewire.on('eventPublished', () => {
-            console.log('so far so good');
-        })
 
 
 </script>
+
+<script>
+
+    window.addEventListener('load', () => { // this will clear datepicker upon publishing an event
+        Livewire.on('eventPublished', () => {
+            datepicker.clearSelection();
+            })
+        }, null);
+
+</script>
+
 

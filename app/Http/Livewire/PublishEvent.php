@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use Livewire\Component;
 use App\Models\EventInstance;
+use Livewire\Livewire;
 
 class PublishEvent extends Component
 
@@ -25,6 +26,7 @@ class PublishEvent extends Component
     public function setDate($date) {
         $this->date = $date;
         $this->dateForHumans = date('j F Y', strtotime($this->date));
+
     }
 
     public function publish()
@@ -38,7 +40,7 @@ class PublishEvent extends Component
         $this->emitTo('timeline', 'refreshList');
         $this->reset(['date', 'eventDescription', 'isItYearly', 'dateForHumans']);
         session()->flash('message', 'Event successfully published.');
-        $this->emitSelf('EventPublished');
+        $this->emit('eventPublished');
     }
 
     public function render()

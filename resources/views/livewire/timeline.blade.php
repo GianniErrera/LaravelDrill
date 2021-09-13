@@ -15,11 +15,11 @@
         <div class="md:mb-3 block text-center @if($singleDateQuery) hidden @endif">
             <label for="search" class="block text-center mb-3 font-size-14px font-semibold">Search over dates range:</label>
             <input
-                wire:model="searchRange"
                 id="searchRange"
                 name="searchRange"
                 type="text"
                 class="ml-4 mb-4 p-2 input input-bordered border border-gray-800"
+                size="22"
                 readonly
             >
         </div>
@@ -29,11 +29,11 @@
             <label for="date" class="block text-center mb-3 font-semibold">Pick a date:</label>
 
             <input
-                wire:model="searchDate"
                 id="searchDate"
                 name="searchDate"
                 type="text"
-                class="ml-4 mb-4 p-2 input input-bordered border border-gray-800"
+                class="text-center ml-4 mb-4 p-2 input input-bordered border border-gray-800"
+                size="22"
                 readonly
             >
 
@@ -158,7 +158,7 @@
 
     </div>
     <script>
-        const picker= new Litepicker({
+        const singlePicker= new Litepicker({
             element: document.getElementById('searchDate'),
             format: 'DD-MM-YYYY',
             resetButton: true,
@@ -167,10 +167,8 @@
             autoRefresh: true,
             dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
             setup: (picker) => {
-
                 picker.on('selected', (date) => {
-                Livewire.emit('selectDate', date.format('YYYY-MM-DD'));
-                document.getElementById('searchDate').value = date.format('YYYY-MM-DD')
+                    Livewire.emit('singleDate', date.format('YYYY-MM-DD'));
                 })
             },
             resetButton: () => {
@@ -178,25 +176,24 @@
                 btn.innerText = 'Clear';
                 btn.addEventListener('click', (evt) => {
                     evt.preventDefault();
-
                     Livewire.emit('resetSearchDate');
                 });
 
                 return btn;
             }
 
-            })
+        })
+
     </script>
     <script>
 
-            const rangepicker= new Litepicker({
+            const rangePicker= new Litepicker({
                 element: document.getElementById('searchRange'),
                 format: 'DD-MM-YYYY',
                 singleMode: false,
                 resetButton: true,
                 dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
                 setup: (picker) => {
-
                     picker.on('selected', (startDate, endDate) => {
                         console.log(startDate, endDate);
                         Livewire.emit('searchRange', startDate.format('YYYY-MM-DD'), endDate.format('YYYY-MM-DD'));
@@ -224,6 +221,22 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 <script>
     new ClipboardJS('#copyToClipboard');
+</script>
+
+<script>
+
+    window.addEventListener('load', () => { // this will clear single datepicker selection
+        Livewire.on('clearSinglePicker', () => {
+        singlePicker.clearSelection();
+        })
+        }, null);
+
+        window.addEventListener('load', () => { // this will clear rangepicker selection
+        Livewire.on('clearRangePicker', () => {
+        rangePicker.clearSelection();
+        })
+        }, null);
+
 </script>
 
 
