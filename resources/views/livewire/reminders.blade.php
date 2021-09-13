@@ -12,7 +12,7 @@
         </button>
     </div>
 
-        @empty
+    @empty
 
-        @endforelse
+    @endforelse
 </div>
