@@ -160,7 +160,7 @@
     <script>
         const singlePicker= new Litepicker({
             element: document.getElementById('searchDate'),
-            format: 'DD-MM-YYYY',
+            format: 'D-MMM-YYYY',
             resetButton: true,
             singleMode: true,
             allowRepick: true,
@@ -178,8 +178,7 @@
                     evt.preventDefault();
                     Livewire.emit('resetSearchDate');
                 });
-
-                return btn;
+            return btn;
             }
 
         })
@@ -189,7 +188,7 @@
 
             const rangePicker= new Litepicker({
                 element: document.getElementById('searchRange'),
-                format: 'DD-MM-YYYY',
+                format: 'D-MMM-YYYY',
                 singleMode: false,
                 resetButton: true,
                 dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
@@ -199,14 +198,12 @@
                     })
                 },
                 resetButton: () => {
-                let btn = document.createElement('button');
-                btn.innerText = 'Clear';
-                btn.addEventListener('click', (evt) => {
-                    evt.preventDefault();
-/*
-                    Livewire.emit('resetDateRange'); */
-                });
-
+                    let btn = document.createElement('button');
+                    btn.innerText = 'Clear';
+                    btn.addEventListener('click', (evt) => {
+                        evt.preventDefault();/*
+                        Livewire.emit('resetDateRange'); */
+                    });
                 return btn;
                 }
 
