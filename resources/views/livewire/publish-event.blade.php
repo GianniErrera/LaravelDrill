@@ -7,7 +7,6 @@
         @endif
     </div>
 
-
     <div class="border border-blue-400 rounded-lg px-8 py-6 lg:ml-6 mb-6 mr-2 md:mx-auto">
         <form wire:submit.prevent="publish">
 

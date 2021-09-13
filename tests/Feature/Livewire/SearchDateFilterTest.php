@@ -29,7 +29,7 @@ class SearchDateFilterTest extends TestCase
             'date' => '1715-01-23']);
 
             Livewire::test(Timeline::class)
-            ->set('searchDate', "1802-12-23")
+            ->set('singleDate', "1802-12-23")
             ->assertSee('foo')
             ->assertDontSee('fool');
 
@@ -49,7 +49,7 @@ class SearchDateFilterTest extends TestCase
             'date' => '1715-01-23']);
 
             Livewire::test(Timeline::class)
-            ->set('searchDate', "date")
+            ->set('singleDate', "date")
             ->assertDontSee('foo');
 
     }
