@@ -107,7 +107,10 @@
 
     <div>
         @if (session()->has('message'))
-            <div class="success">
+            <div class="success"
+            x-transition:enter.duration.500ms
+            x-transition:leave.duration.400ms
+            >
 
                 {{ session('message') }}
 

@@ -118,7 +118,6 @@
 
     window.addEventListener('load', () => { // this will clear datepicker upon publishing an event
         Livewire.on('eventPublished', () => {
-            alert('hooray');
             datepicker.clearSelection();
             })
         });
