@@ -13,7 +13,7 @@
             <div class="lg:flex p-4 text-center">
                 <div class="lg:mr-4 lg:p-4 mb-6 text-center">
                     <div>
-                        <span class="block mb-2 text-center font-semibold">Pick a date:</span>
+                        <span class="text-sm block mb-2 text-center font-semibold">Pick a date:</span>
 
                         <input
                             wire:model="dateForHumans"
