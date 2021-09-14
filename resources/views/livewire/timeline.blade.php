@@ -144,7 +144,6 @@
                     </div>
                     <div class="lg:mr-4">
                         <button class="btn btn-primary hover:text-yellow-100"
-                            id="copyToClipboard-{{$event->id}}"
                             data-clipboard-text="{{$event->eventDescription . " - " . date_format(date_create($event->date), "F m, Y")}}">
                             Copy to clipboard
                         </button>
