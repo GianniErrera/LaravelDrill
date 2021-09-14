@@ -143,7 +143,8 @@
                         @endif
                     </div>
                     <div class="lg:mr-4">
-                        <button class="btn btn-primary hover:text-yellow-100"
+                        <button class="btn btn-primary hover:text-yellow-100 clipboard"
+                            id="copyToClipboard-{{$event->id}}"
                             data-clipboard-text="{{$event->eventDescription . " - " . date_format(date_create($event->date), "F m, Y")}}">
                             Copy to clipboard
                         </button>
@@ -218,7 +219,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
 <script>
-    new ClipboardJS('#copyToClipboard');
+    new ClipboardJS('.clipboard');
 </script>
 
 <script>

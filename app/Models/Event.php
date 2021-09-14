@@ -60,24 +60,19 @@ class Event extends Model
                             orWhereMonth('date', '=', $rangeEndMonth)->
                             whereDay('date', '<=', $rangeEndDay);
                     }
-
                 }
-
+            } else {
+                return $query; // if required parameters are not provided just return the query
             }
 
-            else {
-                return $query;
-            }
+        } else { // date query when ignoreYearFromQuery is false
 
-        }
-
-        else { // date query when checkbox is not checked
             if($startDate && $endDate) {
              $query->
                 whereDate('date', '>=', date_format(date_create($startDate), 'Y-m-d'))->
                 whereDate('date', '<=', date_format(date_create($endDate), 'Y-m-d'));
             } else {
-                return $query;
+                return $query; // if required parameters are not provided just return the query
             }
         }
     }
