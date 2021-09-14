@@ -2,7 +2,7 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\EventInstance;
+use App\Models\Event;
 use Livewire\WithPagination;
 use Livewire\Component;
 
@@ -71,7 +71,7 @@ class Timeline extends Component
 
     public function render() {
         return view('livewire.timeline',
-            ['events' => EventInstance::
+            ['events' => Event::
                 search($this->search)->
                 searchDate($this->ignoreYearFromQuery, $this->singleDate)->
                 timeInterval($this->ignoreYearFromQuery, $this->startDate, $this->endDate)->

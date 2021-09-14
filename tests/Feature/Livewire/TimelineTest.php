@@ -4,7 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\Timeline;
 use App\Models\User;
-use App\Models\EventInstance;
+use App\Models\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -18,7 +18,7 @@ class TimelineTest extends TestCase
     /** @test */
     public function timeline_has_events() {
 
-        EventInstance::factory()->count(20)->create();
+        Event::factory()->count(20)->create();
 
         $this->assertDatabaseCount('events', 20);
     }
@@ -27,13 +27,13 @@ class TimelineTest extends TestCase
     public function events_in_different_years() {
 
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'foo',
             'isItRecurringYearly' => false,
             'date' => '1802-12-23']);
 
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'too',
             'isItRecurringYearly' => false,
             'date' => '2018-01-23']);
@@ -53,13 +53,13 @@ class TimelineTest extends TestCase
     /** @test */
     public function events_in_wrong_date_range() {
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'foo',
             'isItRecurringYearly' => false,
             'date' => '1802-12-23']);
 
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'too',
             'isItRecurringYearly' => false,
             'date' => '2018-01-23']);

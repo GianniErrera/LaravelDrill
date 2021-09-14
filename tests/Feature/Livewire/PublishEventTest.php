@@ -4,7 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\PublishEvent;
 use App\Models\User;
-use App\Models\EventInstance;
+use App\Models\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;

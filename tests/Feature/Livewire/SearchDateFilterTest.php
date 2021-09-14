@@ -4,7 +4,7 @@ namespace Tests\Feature\Livewire;
 
 use App\Http\Livewire\Timeline;
 use App\Models\User;
-use App\Models\EventInstance;
+use App\Models\Event;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Livewire\Livewire;
@@ -17,13 +17,13 @@ class SearchDateFilterTest extends TestCase
 
     /** @test */
     public function date_search_finds_record() {
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'foo',
             'isItRecurringYearly' => false,
             'date' => '1802-12-23']);
 
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'fool',
             'isItRecurringYearly' => false,
             'date' => '1715-01-23']);
@@ -37,13 +37,13 @@ class SearchDateFilterTest extends TestCase
 
     /** @test */
     public function dateSearchNoResults() {
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'foo',
             'isItRecurringYearly' => false,
             'date' => '1802-12-23']);
 
 
-        EventInstance::create([
+        Event::create([
             'eventDescription' => 'fool',
             'isItRecurringYearly' => false,
             'date' => '1715-01-23']);
