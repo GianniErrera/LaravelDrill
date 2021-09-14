@@ -53,9 +53,6 @@ class Timeline extends Component
         $this->emit('clearRangeDatepicker');
     }
 
-    public function updatedSingleDate() {
-        dd('just checking');
-    }
 
 
     public function updatedColumnOrderCriteria() {
@@ -66,38 +63,10 @@ class Timeline extends Component
         $this->resetPage();
     }
 
-    public function updatedSearchDate() {
-        $this->resetPage();
-    }
-
-    public function updatedStartDate() {
-
-        $this->resetPage(); // this should always be triggered
-    }
-
-    public function updatedEndDate() {
-        if($this->startDate && !$this->ignoreYearFromQuery) {
-            $this->validate();
-        }
-
-        $this->resetPage(); // this should always be triggered
-    }
 
     public function updatedIgnoreYearFromQuery() {
-        if($this->startDate && $this->endDate && $this->ignoreYearFromQuery) {
-            $this->resetErrorBag();
-            $this->resetValidation();
-        }
-        elseif($this->startDate && $this->endDate) {
-            $this->validate();
-        }
-       $this->resetPage(); // this should always be triggered
+       $this->resetPage();
    }
-
-   public function hydrate() {
-        $this->resetErrorBag();
-        $this->resetValidation();
-    }
 
 
     public function render() {

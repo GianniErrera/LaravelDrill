@@ -48,14 +48,11 @@ class EventInstance extends Model
                 if($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
 
                     if($rangeStartMonth == $rangeEndMonth) { // if startDate and endDate are on the same month, we must take all days in between range
-
                         $query->
+                            whereMonth('date', '=', $rangeStartMonth)->
                             whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
                             whereDay('date', '<=', date_format(date_create($endDate), 'd'));
-                    }
-
-                    else {
-
+                    } else {
                         $query->
                             whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> // take all months between start and end date, if any
                             whereMonth('date', '<', date_format(date_create($endDate), 'm'))->
@@ -65,16 +62,6 @@ class EventInstance extends Model
                             whereDay('date', '<=', date_format(date_create($endDate), 'd'));
                     }
 
-                }
-
-                else { // endDate is earlier than startDate
-                    $query->
-                        whereMonth('date', '>', date_format(date_create($startDate), 'm'))-> //if startDate is after endDate we take all months in the desired interval
-                        orWhereMonth('date', '<', date_format(date_create($endDate), 'm'))->
-                        orWhereMonth('date', '=', date_format(date_create($startDate), 'm'))-> // since startDate is after endDate, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
-                        whereDay('date', '>=', date_format(date_create($startDate), 'd'))->
-                        orWhereMonth('date', '=', date_format(date_create($endDate), 'm'))->
-                        whereDay('date', '<=', date_format(date_create($endDate), 'd'));
                 }
 
             }
