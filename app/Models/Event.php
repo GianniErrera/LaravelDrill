@@ -41,34 +41,22 @@ class Event extends Model
                 $rangeStartDay = date_format(date_create($startDate), 'd');
                 $rangeEndMonth = date_format(date_create($endDate), 'm');
                 $rangeEndDay = date_format(date_create($endDate), 'd');
-                $startDateNoYear = DateTime::createFromFormat('m-d', $rangeStartMonth . "-" . $rangeStartDay);
-                $endDateNoYear = DateTime::createFromFormat('m-d', $rangeEndMonth . "-" . $rangeEndDay);
 
-                if($startDateNoYear <= $endDateNoYear) {  // if start date is less or equal end date we take all dates over the range between them
-
-                    if($rangeStartMonth == $rangeEndMonth) { // if startDate and endDate are on the same month, we must take all days in between range
-                        $query->
-                            whereMonth('date', '=', $rangeStartMonth)->
-                            whereDay('date', '>=', $rangeStartDay)->
-                            whereDay('date', '<=', $rangeEndDay);
-                    } else {
-                        $query->
-                            whereMonth('date', '>', $rangeStartMonth)-> // take all months between start and end date, if any
-                            whereMonth('date', '<', $rangeEndMonth)->
-                            orWhereMonth('date', '=', $rangeStartMonth)->
-                            whereDay('date', '>=', $rangeStartDay)->
-                            orWhereMonth('date', '=', $rangeEndMonth)->
-                            whereDay('date', '<=', $rangeEndDay);
-                    }
-                } else { // end_date is earlier than start_date
+                if($rangeStartMonth == $rangeEndMonth) { // if startDate and endDate are on the same month, we must take all days in between range
                     $query->
-                        whereMonth('date', '>', $rangeStartMonth)-> //if start_date is after end_date we take all months in the desired interval
-                        orWhereMonth('date', '<', $rangeEndMonth)->
-                        orWhereMonth('date', '=', $rangeStartMonth)-> // since start_date is after end_date, in the corner case they should be both in the same month we take e.g. all days > 20 and all days < 15
+                        whereMonth('date', '=', $rangeStartMonth)->
+                        whereDay('date', '>=', $rangeStartDay)->
+                        whereDay('date', '<=', $rangeEndDay);
+                } else {
+                    $query->
+                        whereMonth('date', '>', $rangeStartMonth)-> // take all months between start and end date, if any
+                        whereMonth('date', '<', $rangeEndMonth)->
+                        orWhereMonth('date', '=', $rangeStartMonth)->
                         whereDay('date', '>=', $rangeStartDay)->
                         orWhereMonth('date', '=', $rangeEndMonth)->
                         whereDay('date', '<=', $rangeEndDay);
                 }
+
             } else {
                 return $query; // if required parameters are not provided just return the query
             }

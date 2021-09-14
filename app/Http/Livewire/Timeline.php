@@ -29,6 +29,9 @@ class Timeline extends Component
         'endDate' => "after:startDate"
     ];
 
+    public function hydrate() {
+        $this->removeFilters();
+    }
 
     public function getSelectedDate($date) {
         $this->singleDate = $date;
