@@ -44,16 +44,16 @@ class Event extends Model
 
                 if($rangeStartMonth == $rangeEndMonth) { // if startDate and endDate are on the same month, we must take all days in between range
                     $query->
-                        whereMonth('date', '=', $rangeStartMonth)->
+                        whereMonth('date', $rangeStartMonth)->
                         whereDay('date', '>=', $rangeStartDay)->
                         whereDay('date', '<=', $rangeEndDay);
                 } else {
                     $query->
                         whereMonth('date', '>', $rangeStartMonth)-> // take all months between start and end date, if any
                         whereMonth('date', '<', $rangeEndMonth)->
-                        orWhereMonth('date', '=', $rangeStartMonth)->
+                        orWhereMonth('date', $rangeStartMonth)->
                         whereDay('date', '>=', $rangeStartDay)->
-                        orWhereMonth('date', '=', $rangeEndMonth)->
+                        orWhereMonth('date', $rangeEndMonth)->
                         whereDay('date', '<=', $rangeEndDay);
                 }
 

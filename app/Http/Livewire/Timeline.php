@@ -18,16 +18,11 @@ class Timeline extends Component
     public $ignoreYearFromQuery;
     public $singleDateQuery;
 
-
     protected $listeners = ["refreshList" => '$refresh',
                             "singleDate" => "getSelectedDate",
                             "searchRange" => "getSearchRange",
                             "resetSearchDate" => "resetSearchDate",
                             "resetDateRange" => "resetDateRange"];
-
-    protected $rules = [
-        'endDate' => "after:startDate"
-    ];
 
 
     public function getSelectedDate($date) {
@@ -53,8 +48,6 @@ class Timeline extends Component
         $this->emit('clearRangeDatepicker');
     }
 
-
-
     public function updatedColumnOrderCriteria() {
         $this->resetPage();
     }
@@ -63,11 +56,9 @@ class Timeline extends Component
         $this->resetPage();
     }
 
-
     public function updatedIgnoreYearFromQuery() {
        $this->resetPage();
    }
-
 
     public function render() {
         return view('livewire.timeline',

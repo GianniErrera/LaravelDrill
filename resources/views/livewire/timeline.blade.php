@@ -19,7 +19,7 @@
                 name="searchRange"
                 type="text"
                 class="ml-4 mb-4 p-2 input input-bordered border border-gray-800"
-                size="22"
+                size="26"
                 readonly
             >
         </div>
@@ -33,7 +33,7 @@
                 name="searchDate"
                 type="text"
                 class="text-center ml-4 mb-4 p-2 input input-bordered border border-gray-800"
-                size="22"
+                size="26"
                 readonly
             >
 
@@ -194,6 +194,8 @@
                 format: 'D-MMM-YYYY',
                 singleMode: false,
                 resetButton: true,
+                numberOfMonths: 2,
+                numberOfColumns: 2,
                 dropdowns: {"minYear":null,"maxYear":null,"months":true,"years":true},
                 setup: (picker) => {
                     picker.on('selected', (startDate, endDate) => {
