@@ -3,7 +3,7 @@
 namespace App\Http\Livewire;
 
 use Livewire\Component;
-use App\Models\EventInstance;
+use App\Models\Event;
 use Livewire\Livewire;
 
 class PublishEvent extends Component
@@ -32,7 +32,7 @@ class PublishEvent extends Component
     public function publish()
     {
         $this->validate();
-        $event = new EventInstance();
+        $event = new Event();
         $event->eventDescription = $this->eventDescription;
         $event->isItRecurringYearly = $this->isItYearly;
         $event->date = $this->date; // I have to change format since changing $date format changes also on display
